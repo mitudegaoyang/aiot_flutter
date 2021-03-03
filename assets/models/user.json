@@ -1,0 +1,56 @@
+{
+  "id": "",
+  "name": "",
+  "tenantId": null,
+  "identity": "",
+  "roleId": "",
+  "roleName": "",
+  "organizationId": null,
+  "organizationName": null,
+  "userType": "",
+  "phone": null,
+  "enable": 1,
+  "editable": 1,
+  "loginIp": "",
+  "loginAddress": null,
+  "loginAt": 1614751042261,
+  "loginFirst": 1,
+  "createdAt": 1584931712961,
+  "updatedAt": 1614751042262,
+  "permissionList": [
+    {
+      "id": "",
+      "code": "",
+      "name": "",
+      "type": "",
+      "menuOrder": 11,
+      "permissions": []
+    },
+    {
+      "id": "",
+      "code": "",
+      "name": "",
+      "type": "",
+      "menuOrder": 80,
+      "permissions": [
+        {
+          "id": "",
+          "code": "",
+          "name": "",
+          "type": "",
+          "menuOrder": 840,
+          "permissions": [
+            {
+                  "id": "",
+                  "code": "",
+                  "name": "",
+                  "type": "",
+                  "menuOrder": 80,
+                  "permissions":null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
