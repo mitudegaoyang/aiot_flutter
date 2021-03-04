@@ -1,0 +1,21 @@
+{
+  "id": "",
+  "name": "",
+  "adminUserId": "",
+  "adminUserName": "",
+  "adminUserIdentity": "",
+  "phone": "",
+  "address": "",
+  "description": "",
+  "enable": 1,
+  "tenantLogo": {
+    "generalLogoPath": null,
+    "darkLogoPath": null,
+    "lightLogoPath": null
+  },
+  "location": "",
+  "longitude": null,
+  "latitude": null,
+  "createdAt": 1595407868617,
+  "updatedAt": 1595407868617
+}
