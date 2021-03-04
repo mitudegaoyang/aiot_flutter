@@ -10,7 +10,7 @@ import 'package:aiot/app/modules/tenant/views/tenant_view.dart';
 part 'app_routes.dart';
 
 class AppPages {
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.TENANT;
 
   static final routes = [
     GetPage(
