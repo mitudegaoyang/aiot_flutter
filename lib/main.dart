@@ -9,6 +9,8 @@ import 'app/routes/app_pages.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // final directory = await getApplicationDocumentsDirectory();
+  // print(directory);
   await GetStorage.init();
   await CloudConfig.init();
   runApp(

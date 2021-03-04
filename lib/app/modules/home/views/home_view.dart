@@ -7,9 +7,9 @@ import 'package:aiot/app/modules/home/controllers/auth_controller.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  final AuthController c = Get.find();
   @override
   Widget build(BuildContext context) {
+    final AuthController c = Get.find();
     return Scaffold(
       appBar: AppBar(
         title: Text('HomeView'),
