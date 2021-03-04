@@ -1,4 +1,6 @@
 class ServerTable {
+  static const String tableName = "server";
+
   static const String createQuery = '''
   DROP TABLE IF EXISTS "server";
   CREATE TABLE "server" (
