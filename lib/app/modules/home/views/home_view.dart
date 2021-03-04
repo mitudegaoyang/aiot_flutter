@@ -21,18 +21,27 @@ class HomeView extends GetView<HomeController> {
           )
         ],
       ),
-      body: Center(
-        child: Obx(
-          () => c.user != null
-              ? Text(
-                  '欢迎您 ${c.user.value.name} ！',
-                  style: TextStyle(fontSize: 20),
-                )
-              : Text(
-                  '1',
-                  style: TextStyle(fontSize: 20),
-                ),
-        ),
+      body: Column(
+        children: [
+          Obx(
+            () => c.user != null
+                ? Text(
+                    '欢迎您 ${c.user.value.name} ！',
+                    style: TextStyle(fontSize: 20),
+                  )
+                : Text(
+                    '1',
+                    style: TextStyle(fontSize: 20),
+                  ),
+          ),
+          FlatButton(
+            child: Text('Go Tenant Page'),
+            color: Colors.blue,
+            onPressed: () {
+              Get.toNamed('/tenant');
+            },
+          )
+        ],
       ),
     );
   }
