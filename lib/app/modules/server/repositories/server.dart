@@ -12,6 +12,12 @@ class ServerRepository extends GetxService {
     return server;
   }
 
+  Future<Server> update(Server server) async {
+    server.id = await dbService.instance.update("server", server.toJson(),
+        where: "id = ?", whereArgs: [server.id]);
+    return server;
+  }
+
   Future<int> delete(int id) async {
     return await dbService.instance
         .delete("server", where: 'id = ?', whereArgs: [id]);
@@ -22,8 +28,14 @@ class ServerRepository extends GetxService {
     return [for (var row in rows) Server.fromJson(row)];
   }
 
-  Future<Server> getLast() async {
-    List<Map> rows = await dbService.instance.query("server", limit: 1);
+  Future<Server> getById(int id) async {
+    List<Map> rows = await dbService.instance
+        .query("server", where: 'id = ?', whereArgs: [id], limit: 1);
     return Server.fromJson(rows.first);
   }
+
+  // Future<Server> getLast() async {
+  //   List<Map> rows = await dbService.instance.query("server", limit: 1);
+  //   return Server.fromJson(rows.first);
+  // }
 }
