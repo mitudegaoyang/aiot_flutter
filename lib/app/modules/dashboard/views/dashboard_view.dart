@@ -14,13 +14,95 @@ class DashboardView extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('DashboardView'),
+        backgroundColor: Colors.white,
+        title: Text(
+          'DashboardView',
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
         centerTitle: true,
+        elevation: 0,
       ),
-      body: Center(
-        child: Text(
-          'DashboardView is working',
-          style: TextStyle(fontSize: 20),
+      body: Container(
+        width: double.infinity,
+        color: Colors.white,
+        child: SingleChildScrollView(
+          // padding: EdgeInsets.symmetric(vertical: 0, horizontal: 20.0),
+          child: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                height: 200.0,
+                color: Color(0xffe4e4e4),
+                child: Text('数据统计'),
+              ),
+              SizedBox(
+                height: 24.0,
+              ),
+              Card(
+                margin: EdgeInsets.symmetric(vertical: 0, horizontal: 20.0),
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                elevation: 8,
+                shadowColor: Color(0xffffffff),
+                child: Container(
+                  width: double.infinity,
+                  height: 200.0,
+                  child: Text('设备统计'),
+                ),
+              ),
+              SizedBox(
+                height: 24.0,
+              ),
+              Card(
+                margin: EdgeInsets.symmetric(vertical: 0, horizontal: 20.0),
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                elevation: 8,
+                shadowColor: Color(0xffffffff),
+                child: Container(
+                  width: double.infinity,
+                  height: 200.0,
+                  child: Text('设备接入Top5'),
+                ),
+              ),
+              SizedBox(
+                height: 24.0,
+              ),
+              Card(
+                margin: EdgeInsets.symmetric(vertical: 0, horizontal: 20.0),
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                elevation: 8,
+                shadowColor: Color(0xffffffff),
+                child: Container(
+                  width: double.infinity,
+                  height: 200.0,
+                  child: Text('设备比例'),
+                ),
+              ),
+              SizedBox(
+                height: 24.0,
+              ),
+              Card(
+                margin: EdgeInsets.symmetric(vertical: 0, horizontal: 20.0),
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                elevation: 8,
+                shadowColor: Color(0xffffffff),
+                child: Container(
+                  width: double.infinity,
+                  height: 200.0,
+                  child: Text('消息上报'),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
