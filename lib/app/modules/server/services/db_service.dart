@@ -15,14 +15,14 @@ class DbService extends GetxService {
     var databasesPath = await getDatabasesPath();
     String path = join(databasesPath, 'aiot.db');
     print(path);
-    Future onConfigure(Database db) async {
-      await db.execute('PRAGMA foreign_keys = ON');
-    }
+    // Future onConfigure(Database db) async {
+    //   await db.execute('PRAGMA foreign_keys = ON');
+    // }
 
     _db = await openDatabase(
       path,
       version: 1,
-      onConfigure: onConfigure,
+      // onConfigure: onConfigure,
       onCreate: (Database db, int version) async {
         print('onCreate');
         print(db);
