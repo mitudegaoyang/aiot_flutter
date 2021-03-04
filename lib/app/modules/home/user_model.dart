@@ -1,18 +1,18 @@
 class User {
   String id;
   String name;
-  Null tenantId;
+  String tenantId;
   String identity;
   String roleId;
   String roleName;
-  Null organizationId;
-  Null organizationName;
+  String organizationId;
+  String organizationName;
   String userType;
-  Null phone;
+  String phone;
   int enable;
   int editable;
   String loginIp;
-  Null loginAddress;
+  String loginAddress;
   int loginAt;
   int loginFirst;
   int createdAt;

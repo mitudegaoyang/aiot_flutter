@@ -26,7 +26,8 @@ class AuthController extends GetxController {
       _box.write(_key, data.body.accessToken);
       authProvider.touch().then((data) {
         user.value = data.body;
-        // print(data.body.name);
+      }, onError: (err) {
+        print(err);
       });
     }, onError: (err) {
       print(err);
