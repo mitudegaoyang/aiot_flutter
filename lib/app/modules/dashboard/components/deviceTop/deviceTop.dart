@@ -3,8 +3,8 @@
 // import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-class CardGrid extends StatelessWidget {
-  const CardGrid({
+class DeviceTop extends StatelessWidget {
+  const DeviceTop({
     Key key,
   }) : super(key: key);
 
@@ -12,7 +12,7 @@ class CardGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox.expand(
       child: Container(
-        child: Text('CardGrid'),
+        child: Text('设备接入Top5'),
       ),
     );
   }

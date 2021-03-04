@@ -3,8 +3,8 @@
 // import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-class BarChart extends StatelessWidget {
-  const BarChart({
+class DeviceRatio extends StatelessWidget {
+  const DeviceRatio({
     Key key,
   }) : super(key: key);
 
@@ -12,7 +12,7 @@ class BarChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox.expand(
       child: Container(
-        child: Text('BarChart'),
+        child: Text('设备比例'),
       ),
     );
   }

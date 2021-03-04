@@ -3,8 +3,8 @@
 // import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-class PieChart extends StatelessWidget {
-  const PieChart({
+class DataStatistics extends StatelessWidget {
+  const DataStatistics({
     Key key,
   }) : super(key: key);
 
@@ -12,7 +12,7 @@ class PieChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox.expand(
       child: Container(
-        child: Text('PieChart'),
+        child: Text('数据统计'),
       ),
     );
   }

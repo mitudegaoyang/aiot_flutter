@@ -4,8 +4,8 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
-class LineChartAiot extends StatefulWidget {
-  const LineChartAiot({
+class DeviceStatistics extends StatefulWidget {
+  const DeviceStatistics({
     Key key,
   }) : super(key: key);
 
@@ -13,7 +13,7 @@ class LineChartAiot extends StatefulWidget {
   _LineChartAiotState createState() => _LineChartAiotState();
 }
 
-class _LineChartAiotState extends State<LineChartAiot> {
+class _LineChartAiotState extends State<DeviceStatistics> {
   List<Color> gradientColors = [
     const Color(0xff23b6e6),
     const Color(0xff02d39a),
