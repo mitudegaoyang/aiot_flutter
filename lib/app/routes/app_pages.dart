@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import 'package:aiot/app/modules/dashboard/bindings/dashboard_binding.dart';
+import 'package:aiot/app/modules/dashboard/views/dashboard_view.dart';
 import 'package:aiot/app/modules/home/bindings/home_binding.dart';
 import 'package:aiot/app/modules/home/views/home_view.dart';
 import 'package:aiot/app/modules/tenant/bindings/tenant_binding.dart';
@@ -20,6 +22,11 @@ class AppPages {
       name: _Paths.TENANT,
       page: () => TenantView(),
       binding: TenantBinding(),
+    ),
+    GetPage(
+      name: _Paths.DASHBOARD,
+      page: () => DashboardView(),
+      binding: DashboardBinding(),
     ),
   ];
 }
