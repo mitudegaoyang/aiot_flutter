@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/dashboard_controller.dart';
-// import 'package:aiot/app/modules/dashboard/components/barChart/barChart.dart';
-// import 'package:aiot/app/modules/dashboard/components/cardGrid/cardGrid.dart';
-// import 'package:aiot/app/modules/dashboard/components/labellineChart/labellineChart.dart';
-// import 'package:aiot/app/modules/dashboard/components/lineChart/lineChart.dart';
-// import 'package:aiot/app/modules/dashboard/components/pieChart/pieChart.dart';
+import 'package:aiot/app/modules/dashboard/components/dataStatistics/dataStatistics.dart';
+import 'package:aiot/app/modules/dashboard/components/deviceStatistics/deviceStatistics.dart';
+import 'package:aiot/app/modules/dashboard/components/deviceTop/deviceTop.dart';
+import 'package:aiot/app/modules/dashboard/components/deviceRatio/deviceRatio.dart';
+import 'package:aiot/app/modules/dashboard/components/telemetryTrend/telemetryTrend.dart';
 
 class DashboardView extends GetView<DashboardController> {
   @override
@@ -35,7 +35,7 @@ class DashboardView extends GetView<DashboardController> {
                 width: double.infinity,
                 height: 200.0,
                 color: Color(0xffe4e4e4),
-                child: Text('数据统计'),
+                child: DataStatistics(),
               ),
               SizedBox(
                 height: 24.0,
@@ -50,7 +50,7 @@ class DashboardView extends GetView<DashboardController> {
                 child: Container(
                   width: double.infinity,
                   height: 200.0,
-                  child: Text('设备统计'),
+                  child: DeviceStatistics(),
                 ),
               ),
               SizedBox(
@@ -66,7 +66,7 @@ class DashboardView extends GetView<DashboardController> {
                 child: Container(
                   width: double.infinity,
                   height: 200.0,
-                  child: Text('设备接入Top5'),
+                  child: DeviceTop(),
                 ),
               ),
               SizedBox(
@@ -82,7 +82,7 @@ class DashboardView extends GetView<DashboardController> {
                 child: Container(
                   width: double.infinity,
                   height: 200.0,
-                  child: Text('设备比例'),
+                  child: DeviceRatio(),
                 ),
               ),
               SizedBox(
@@ -98,7 +98,7 @@ class DashboardView extends GetView<DashboardController> {
                 child: Container(
                   width: double.infinity,
                   height: 200.0,
-                  child: Text('消息上报'),
+                  child: TelemetryTrend(),
                 ),
               ),
             ],
