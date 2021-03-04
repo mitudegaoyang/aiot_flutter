@@ -25,11 +25,6 @@ class _LineChartAiotState extends State<DeviceStatistics> {
       child: Stack(
         children: <Widget>[
           Container(
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(18),
-                ),
-                color: Color(0xff232d37)),
             child: Padding(
               padding: const EdgeInsets.only(
                   right: 12.0, left: 12.0, top: 24, bottom: 12),
@@ -39,14 +34,15 @@ class _LineChartAiotState extends State<DeviceStatistics> {
             ),
           ),
           Positioned(
-            top: 5,
-            left: 5,
+            top: 20,
+            left: 0,
             child: Text(
-              '访问量',
+              '设备统计',
               style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.white,
-                  decoration: TextDecoration.none),
+                fontSize: 16,
+                color: Colors.grey[500],
+                decoration: TextDecoration.none,
+              ),
             ),
           )
         ],
@@ -57,25 +53,25 @@ class _LineChartAiotState extends State<DeviceStatistics> {
   LineChartData mainData() {
     return LineChartData(
       gridData: FlGridData(
-        show: true,
-        drawVerticalLine: true,
-        getDrawingHorizontalLine: (value) {
-          return FlLine(
-            color: const Color(0xff37434d),
-            strokeWidth: 1,
-          );
-        },
-        getDrawingVerticalLine: (value) {
-          return FlLine(
-            color: const Color(0xff37434d),
-            strokeWidth: 1,
-          );
-        },
+        show: false, // 网格线
+        drawVerticalLine: false, // 垂直网格线
+        // getDrawingHorizontalLine: (value) {
+        //   return FlLine(
+        //     color: const Color(0xff37434d),
+        //     strokeWidth: 1,
+        //   );
+        // },
+        // getDrawingVerticalLine: (value) {
+        //   return FlLine(
+        //     color: const Color(0xff37434d),
+        //     strokeWidth: 1,
+        //   );
+        // },
       ),
       titlesData: FlTitlesData(
         show: true,
         bottomTitles: SideTitles(
-          showTitles: true,
+          showTitles: true, // 是否显示x轴图例
           reservedSize: 22,
           getTextStyles: (value) => const TextStyle(
               color: Color(0xff68737d),
@@ -90,7 +86,7 @@ class _LineChartAiotState extends State<DeviceStatistics> {
           margin: 8,
         ),
         leftTitles: SideTitles(
-          showTitles: true,
+          showTitles: false, // 是否显示y轴图例
           getTextStyles: (value) => const TextStyle(
             color: Color(0xff67727d),
             fontWeight: FontWeight.bold,
@@ -112,9 +108,9 @@ class _LineChartAiotState extends State<DeviceStatistics> {
         ),
       ),
       borderData: FlBorderData(
-          show: true,
+          show: false, // 是否显示边框
           border: Border.all(color: const Color(0xff37434d), width: 1)),
-      minX: 0,
+      minX: 1,
       maxX: 11,
       minY: 0,
       maxY: 6,
@@ -132,6 +128,7 @@ class _LineChartAiotState extends State<DeviceStatistics> {
         FlSpot(8, 4),
         FlSpot(9.5, 3),
         FlSpot(11, 4),
+        FlSpot(12, 6),
       ],
       isCurved: true,
       colors: gradientColors,
