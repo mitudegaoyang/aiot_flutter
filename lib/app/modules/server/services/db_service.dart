@@ -3,14 +3,14 @@ import 'package:get/get.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-class DbProvider extends GetxService {
+class DbService extends GetxService {
   Database _db;
 
   Database get instance => _db;
 
   @override
   void onInit() async {
-    print('-----onInit DbProvider');
+    print('-----onInit DbService');
     super.onInit();
     var databasesPath = await getDatabasesPath();
     String path = join(databasesPath, 'aiot.db');
