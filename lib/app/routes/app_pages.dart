@@ -1,18 +1,22 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:aiot/app/modules/dashboard/bindings/dashboard_binding.dart';
 import 'package:aiot/app/modules/dashboard/views/dashboard_view.dart';
 import 'package:aiot/app/modules/home/bindings/home_binding.dart';
 import 'package:aiot/app/modules/home/views/home_view.dart';
+import 'package:aiot/app/modules/server/bindings/server_binding.dart';
+import 'package:aiot/app/modules/server/views/server_view.dart';
 import 'package:aiot/app/modules/tenant/bindings/tenant_binding.dart';
 import 'package:aiot/app/modules/tenant/views/tenant_view.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   // static const INITIAL = Routes.DASHBOARD;
   // static const INITIAL = Routes.TENANT;
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.SERVER;
 
   static final routes = [
     GetPage(
@@ -30,5 +34,40 @@ class AppPages {
       page: () => DashboardView(),
       binding: DashboardBinding(),
     ),
+    GetPage(
+      name: _Paths.SERVER,
+      page: () => ServerView(),
+      binding: ServerBinding(),
+    ),
   ];
+
+  static Route<dynamic> onGenerateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case Routes.SERVER:
+        return MaterialWithModalsPageRoute(
+          builder: (BuildContext context) => ServerView(),
+          settings: settings,
+        );
+      case Routes.HOME:
+        return MaterialWithModalsPageRoute(
+          builder: (BuildContext context) => HomeView(),
+          settings: settings,
+        );
+      case Routes.TENANT:
+        return MaterialWithModalsPageRoute(
+          builder: (BuildContext context) => TenantView(),
+          settings: settings,
+        );
+      case Routes.DASHBOARD:
+        return MaterialWithModalsPageRoute(
+          builder: (BuildContext context) => DashboardView(),
+          settings: settings,
+        );
+      default:
+        return MaterialWithModalsPageRoute(
+          builder: (BuildContext context) => ServerView(),
+          settings: settings,
+        );
+    }
+  }
 }
