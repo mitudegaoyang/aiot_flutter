@@ -11,10 +11,8 @@ class TenantController extends GetxController {
   ScrollController scrollController = new ScrollController();
 
   final isLoading = true.obs;
-  final hasMore = true.obs;
   // 总页数
-  // int totalPages = 1;
-  final totalPages = 1.obs;
+  // final totalPages = 1.obs;
   // 当前页数
   final pageIndex = 1.obs;
 
@@ -26,12 +24,18 @@ class TenantController extends GetxController {
   void onInit() {
     super.onInit();
     _getMoreData();
+
+    //上拉加载更多
     scrollController.addListener(() {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
-        print('滑动到了最底部');
+        // print('滑动到了最底部');
         isLoading.value = true;
-        _getMoreData();
+        if (tmpList.length == tenantlist.value.totalRecords) {
+          print("没有更多了");
+        } else {
+          _getMoreData();
+        }
         // if (pageno < totalPages - 1) {
         //   pageno++;
         //   // print('加载更多 pageno:' + pageno.toString());
@@ -62,14 +66,13 @@ class TenantController extends GetxController {
 
   void _getMoreData() async {
     if (isLoading != null) {
+      print(pageIndex.value);
       tenantProvider.getTenants(pageIndex.value).then(
         (data) {
           tenantlist.value = data.body;
           tmpList.addAll(data.body.data);
           tenantlist.value.data = tmpList;
           pageIndex.value = data.body.pageIndex + 1;
-          // int totalPages = ((data.body.totalRecords + 8 - 1) / 8) as int; //推荐写法
-          // totalPages.value = totalPages;
           Future.delayed(const Duration(milliseconds: 3000), () {
             isLoading.value = false;
           });
@@ -81,5 +84,13 @@ class TenantController extends GetxController {
         },
       );
     }
+  }
+
+//下拉刷新
+  Future<void> onRefresh() async {
+    tmpList.clear();
+    isLoading.value = true;
+    pageIndex.value = 1;
+    _getMoreData();
   }
 }

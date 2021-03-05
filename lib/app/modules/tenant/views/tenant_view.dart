@@ -77,6 +77,23 @@ class TenantView extends GetView<TenantController> {
     );
   }
 
+  Widget _buildList() {
+    return Obx(() {
+      int len =
+          c.tenantlist.value.data == null ? 0 : c.tenantlist.value.data.length;
+      return ListView.builder(
+          controller: c.scrollController,
+          itemCount: len + 1,
+          itemBuilder: (context, index) {
+            if (index == len) {
+              return _buildProgressIndicator();
+            }
+            final tenant = c.tenantlist.value.data[index];
+            return _buildRow(tenant);
+          });
+    });
+  }
+
   Widget _buildProgressIndicator() {
     return new Padding(
       padding: const EdgeInsets.all(8.0),
@@ -120,21 +137,11 @@ class TenantView extends GetView<TenantController> {
         child: Column(
           children: [
             SearchBar(),
-            Expanded(child: Obx(() {
-              int len = c.tenantlist.value.data == null
-                  ? 0
-                  : c.tenantlist.value.data.length;
-              return ListView.builder(
-                  controller: c.scrollController,
-                  itemCount: len + 1,
-                  itemBuilder: (context, index) {
-                    if (index == len) {
-                      return _buildProgressIndicator();
-                    }
-                    final tenant = c.tenantlist.value.data[index];
-                    return _buildRow(tenant);
-                  });
-            }))
+            Expanded(
+                child: RefreshIndicator(
+              onRefresh: c.onRefresh,
+              child: _buildList(),
+            ))
           ],
         ),
       ),
