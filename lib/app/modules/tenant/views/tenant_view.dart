@@ -1,3 +1,4 @@
+import 'package:aiot/app/modules/tenant/tenant_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -6,21 +7,9 @@ import '../../../../utils/screen_utils.dart';
 import '../controllers/tenant_controller.dart';
 
 class TenantView extends GetView<TenantController> {
-  List<Widget> _getData() {
-    List<Widget> list = new List();
-    const data = [
-      {"id": 1, "userName": "user1", "email": "user1@sunseaaiot.com"},
-      {"id": 2, "userName": "user2", "email": "user2@sunseaaiot.com"},
-      {"id": 3, "userName": "user3", "email": "user3@sunseaaiot.com"},
-    ];
-    for (var i = 0; i < data.length; i++) {
-      list.add(listItem(data[i]));
-    }
-    return list;
-  }
+  final TenantController c = Get.find();
 
-  Widget listItem(itemData) {
-    print(itemData);
+  Widget _buildRow(Tenant item) {
     return Container(
       margin: EdgeInsets.only(bottom: getProportionateScreenHeight(16)),
       child: Row(
@@ -29,7 +18,13 @@ class TenantView extends GetView<TenantController> {
             width: getProportionateScreenWidth(52),
             height: getProportionateScreenHeight(52),
             decoration: BoxDecoration(
-                color: Colors.red,
+                image: new DecorationImage(
+                  image: new AssetImage(
+                    'assets/images/avatar.png',
+                  ),
+                  fit: BoxFit.contain,
+                ),
+                // color: Colors.red,
                 borderRadius: BorderRadius.all(Radius.circular(52))),
           ),
           Container(
@@ -54,7 +49,7 @@ class TenantView extends GetView<TenantController> {
                     padding:
                         EdgeInsets.only(top: getProportionateScreenWidth(6)),
                     child: Text(
-                      itemData['userName'],
+                      item.name,
                       style: TextStyle(
                         fontFamily: 'Avenir-Heavy',
                         fontSize: 16,
@@ -66,7 +61,7 @@ class TenantView extends GetView<TenantController> {
                     margin: EdgeInsets.only(
                       top: getProportionateScreenWidth(10),
                     ),
-                    child: Text(itemData['email'],
+                    child: Text(item.adminUserIdentity,
                         style: TextStyle(
                           fontFamily: 'Avenir-Roman',
                           fontSize: 14,
@@ -99,9 +94,14 @@ class TenantView extends GetView<TenantController> {
           children: [
             SearchBar(),
             Expanded(
-                child: ListView(
-              children: _getData(),
-            ))
+                child: Obx(() => ListView.builder(
+                    itemCount: c.tenantlist.value.data == null
+                        ? 0
+                        : c.tenantlist.value.data.length,
+                    itemBuilder: (context, index) {
+                      final tenant = c.tenantlist.value.data[index];
+                      return _buildRow(tenant);
+                    })))
           ],
         ),
       ),
