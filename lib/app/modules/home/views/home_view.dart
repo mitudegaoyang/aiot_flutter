@@ -1,3 +1,5 @@
+import 'package:aiot/app/modules/tenant/bindings/tenant_binding.dart';
+import 'package:aiot/app/modules/tenant/views/tenant_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -38,7 +40,8 @@ class HomeView extends GetView<HomeController> {
             child: Text('Go Tenant Page'),
             color: Colors.blue,
             onPressed: () {
-              Get.toNamed('/tenant');
+              Get.to(TenantView(), binding: TenantBinding());
+              // Get.toNamed('/tenant');
             },
           )
         ],

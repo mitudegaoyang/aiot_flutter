@@ -7,12 +7,12 @@ class ServerTable {
       "ip"	TEXT,
       "identity"	TEXT,
       "password"	TEXT,
+      "alias"	TEXT,
       "lastConnection"	NUMERIC,
       PRIMARY KEY("id" AUTOINCREMENT)
     );
   ''';
 
   static const String addAliasColumnQuery = '''
-    ALTER TABLE ${ServerTable.tableName} ADD COLUMN "alias" text;
   ''';
 }

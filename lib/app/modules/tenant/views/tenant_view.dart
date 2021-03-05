@@ -7,9 +7,8 @@ import '../../../../utils/screen_utils.dart';
 import '../controllers/tenant_controller.dart';
 
 class TenantView extends GetView<TenantController> {
-  final TenantController c = Get.find();
-
   Widget _buildRow(Tenant item) {
+    final TenantController c = Get.find();
     return Container(
       margin: EdgeInsets.only(bottom: getProportionateScreenHeight(16)),
       child: Row(
@@ -78,6 +77,7 @@ class TenantView extends GetView<TenantController> {
   }
 
   Widget _buildList() {
+    final TenantController c = Get.find();
     return Obx(() {
       int len =
           c.tenantlist.value.data == null ? 0 : c.tenantlist.value.data.length;
@@ -100,6 +100,7 @@ class TenantView extends GetView<TenantController> {
   }
 
   Widget _buildProgressIndicator() {
+    final TenantController c = Get.find();
     return new Padding(
       padding: const EdgeInsets.all(8.0),
       child: new Center(
@@ -129,6 +130,7 @@ class TenantView extends GetView<TenantController> {
 
   @override
   Widget build(BuildContext context) {
+    final TenantController c = Get.find();
     return Scaffold(
       // appBar: AppBar(
       //   backgroundColor: Colors.white,

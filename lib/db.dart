@@ -7,10 +7,11 @@ class GetDb {
   static Future<void> init() async {
     return new Future(() async {
       var databasesPath = await getDatabasesPath();
+      print(databasesPath);
       String path = join(databasesPath, 'aiot.db');
       db = await openDatabase(
         path,
-        version: 2,
+        version: 1,
         // onConfigure: onConfigure,
         onCreate: (Database db, int version) async {
           print('onCreate');
@@ -20,13 +21,13 @@ class GetDb {
           batch.execute(ServerTable.createQuery);
           await batch.commit();
         },
-        onUpgrade: (db, oldVersion, newVersion) async {
-          var batch = db.batch();
-          if (oldVersion <= 1) {
-            batch.execute(ServerTable.addAliasColumnQuery);
-          }
-          await batch.commit();
-        },
+        // onUpgrade: (db, oldVersion, newVersion) async {
+        //   var batch = db.batch();
+        //   if (oldVersion <= 1) {
+        //     batch.execute(ServerTable.addAliasColumnQuery);
+        //   }
+        //   await batch.commit();
+        // },
       );
     });
   }

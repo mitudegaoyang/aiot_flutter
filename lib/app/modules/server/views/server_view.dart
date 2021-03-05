@@ -1,9 +1,6 @@
 import 'package:aiot/app/modules/dashboard/bindings/dashboard_binding.dart';
 import 'package:aiot/app/modules/dashboard/views/dashboard_view.dart';
 import 'package:aiot/app/modules/home/bindings/home_binding.dart';
-import 'package:aiot/app/modules/home/controllers/auth_controller.dart';
-import 'package:aiot/app/modules/home/controllers/home_controller.dart';
-import 'package:aiot/app/modules/home/providers/auth_provider.dart';
 import 'package:aiot/app/modules/home/views/home_view.dart';
 import 'package:aiot/app/modules/server/views/add_view.dart';
 import 'package:aiot/app/modules/tenant/bindings/tenant_binding.dart';
