@@ -33,8 +33,8 @@ class DashboardView extends GetView<DashboardController> {
             children: [
               Container(
                 width: double.infinity,
-                height: 200.0,
-                color: Color(0xffe4e4e4),
+                height: 109.0,
+                color: Color(0xffffffff),
                 child: DataStatistics(),
               ),
               SizedBox(
