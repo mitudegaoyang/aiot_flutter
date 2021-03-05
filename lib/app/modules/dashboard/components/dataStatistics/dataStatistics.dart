@@ -29,32 +29,32 @@ class DataStatistics extends StatelessWidget {
             DataCardGrid(
               title: "产品总数",
               num: 33,
-              colors: [Color(0xFF50D7B1), Color(0xFF85ED6D)],
+              colors: [Color(0xFFFF8733), Color(0xFFF7B733)],
             ),
             DataCardGrid(
               title: "设备总数",
               num: 3015,
-              colors: [Color(0xFF26C7EE), Color(0xFF53F4EC)],
+              colors: [Color(0xFFE49971), Color(0xFFE4B971)],
             ),
             DataCardGrid(
               title: "应用总数",
               num: 0,
-              colors: [Color(0xFF555DEC), Color(0xFF6D0BBD)],
+              colors: [Color(0xFF50D7B1), Color(0xFF85ED6D)],
             ),
             DataCardGrid(
               title: "规则总数",
               num: 1,
-              colors: [Color(0xFFFD6E5E), Color(0xFFFE9F67)],
+              colors: [Color(0xFF53C4EC), Color(0xFF53F4EC)],
             ),
             DataCardGrid(
               title: "告警总数",
               num: 1,
-              colors: [Color(0xFF50D7B1), Color(0xFF85ED6D)],
+              colors: [Color(0xFFFDAFA7), Color(0xFFFDDFA7)],
             ),
             DataCardGrid(
               title: "工单总数",
               num: 0,
-              colors: [Color(0xFF26C7EE), Color(0xFF53F4EC)],
+              colors: [Color(0xFFC996FF), Color(0xFFC9C6FF)],
             ),
           ],
         ),
