@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SearchBar extends StatefulWidget {
   SearchBar({Key key}) : super(key: key);
@@ -36,9 +37,9 @@ class _SearchBarState extends State<SearchBar> {
                     decoration: InputDecoration(
                         prefixIcon: Icon(Icons.search),
                         suffixIcon: Container(
-                          child: SvgPicture.asset(
-                            'assets/images/clear.png',
-                            fit: BoxFit.cover,
+                          child: new SvgPicture.asset(
+                            'assets/icons/clear.svg',
+                            fit: BoxFit.scaleDown,
                           ),
                         ),
                         // suffixIcon: Icon('assets/images/clear.png'),
