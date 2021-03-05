@@ -9,16 +9,52 @@ class SearchBar extends StatefulWidget {
 
 class _SearchBarState extends State<SearchBar> {
   final TextEditingController _controller = new TextEditingController();
-  bool _showBtn = true;
+  bool _showBtn = false;
+  bool _showSuffixBtn = false;
   void _toggleShowButton(showStatus) {
     setState(() {
       _showBtn = showStatus;
+      _showSuffixBtn = showStatus;
     });
+  }
+
+  void _toggleShowSuffixButton(showStatus) {
+    setState(() {
+      _showSuffixBtn = showStatus;
+    });
+  }
+
+  void handleCancel() {
+    _toggleShowButton(false);
+    _controller.clear();
+    // 失去焦点
+    FocusScope.of(context).requestFocus(FocusNode());
+  }
+
+  FocusNode focusNode = FocusNode();
+// 输入框焦点事件的捕捉与监听
+  @override
+  void initState() {
+    super.initState();
+    focusNode.addListener(() {
+      if (focusNode.hasFocus) {
+        setState(() {
+          _showBtn = true;
+        });
+      }
+    });
+  }
+
+//页面销毁
+  @override
+  void dispose() {
+    super.dispose();
+    //释放
+    focusNode.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    print(_controller.text);
     return Container(
       child: Row(
         children: [
@@ -26,49 +62,59 @@ class _SearchBarState extends State<SearchBar> {
               child: Container(
                   height: 40,
                   child: TextField(
+                    cursorColor: Color(0xff4953ed),
                     onChanged: (text) {
                       if (text.length > 0) {
-                        _toggleShowButton(false);
-                      } else {
                         _toggleShowButton(true);
+                        _toggleShowSuffixButton(true);
+                      } else {
+                        _toggleShowSuffixButton(false);
                       }
                     },
                     controller: _controller,
+                    focusNode: focusNode,
                     decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.search),
-                        suffixIcon: Container(
-                          child: new SvgPicture.asset(
-                            'assets/icons/clear.svg',
-                            fit: BoxFit.scaleDown,
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: Color(0xFFC1C0C8),
+                      ),
+                      suffixIcon: _showSuffixBtn
+                          ? Container(
+                              child: GestureDetector(
+                              onTap: () {
+                                _controller.clear();
+                                _toggleShowSuffixButton(false);
+                              },
+                              child: new SvgPicture.asset(
+                                'assets/icons/clear.svg',
+                                fit: BoxFit.scaleDown,
+                              ),
+                            ))
+                          : null,
+                      contentPadding: EdgeInsets.all(0),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xFF4953ED), //边框颜色为绿色
+                            width: 1, //宽度为5
                           ),
-                        ),
-                        // suffixIcon: Icon('assets/images/clear.png'),
-                        // suffixIconConstrain,
-                        contentPadding: EdgeInsets.all(0),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFF4953ED), //边框颜色为绿色
-                              width: 1, //宽度为5
-                            ),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(100))),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color(0xFFC1C0C8),
-                              width: 1,
-                            ),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(100))),
-                        hintText: 'search',
-                        hintStyle: TextStyle()),
+                          borderRadius: BorderRadius.all(Radius.circular(100))),
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color(0xFFC1C0C8),
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(100))),
+                      hintText: 'Search',
+                      hintStyle: TextStyle(color: Color(0xffC1C0C8)),
+                    ),
                   ))),
           SizedBox(
-            width: !_showBtn ? 78 : 0,
-            child: !_showBtn
+            width: _showBtn ? 70 : 0,
+            height: 40,
+            child: _showBtn
                 ? TextButton(
                     onPressed: () {
-                      _toggleShowButton(true);
-                      _controller.clear();
+                      handleCancel();
                     },
                     child: Text(
                       'Cancel',
