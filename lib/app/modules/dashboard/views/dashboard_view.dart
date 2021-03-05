@@ -65,7 +65,7 @@ class DashboardView extends GetView<DashboardController> {
                 shadowColor: Color(0xffffffff),
                 child: Container(
                   width: double.infinity,
-                  height: 200.0,
+                  height: 280.0,
                   child: DeviceTop(),
                 ),
               ),
