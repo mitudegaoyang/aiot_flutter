@@ -78,36 +78,27 @@ class TenantView extends GetView<TenantController> {
   }
 
   Widget _buildProgressIndicator() {
-    print("${c.isLoading.value}kkkk");
     return new Padding(
       padding: const EdgeInsets.all(8.0),
       child: new Center(
         child: Obx(() {
-          return new Opacity(
-            opacity: c.isLoading.value ? 1.0 : 00,
-            child: SizedBox(
-              height: 30,
-              width: 30,
-              child: new CircularProgressIndicator(
-                strokeWidth: 2,
+          int len = c.tenantlist.value.data == null
+              ? 0
+              : c.tenantlist.value.data.length;
+          if (len == c.tenantlist.value.totalRecords) {
+            return Text("没有更多了");
+          } else {
+            return new Opacity(
+              opacity: c.isLoading.value ? 1.0 : 00,
+              child: SizedBox(
+                height: 30,
+                width: 30,
+                child: new CircularProgressIndicator(
+                  strokeWidth: 2,
+                ),
               ),
-            ),
-          );
-          // if (c.tenantlist.value.data.length >=
-          //     c.tenantlist.value.totalRecords) {
-          //   return Text("没有更多了");
-          // } else {
-          //   return new Opacity(
-          //     opacity: c.isLoading.value ? 1.0 : 00,
-          //     child: SizedBox(
-          //       height: 30,
-          //       width: 30,
-          //       child: new CircularProgressIndicator(
-          //         strokeWidth: 2,
-          //       ),
-          //     ),
-          //   );
-          // }
+            );
+          }
         }),
       ),
     );
