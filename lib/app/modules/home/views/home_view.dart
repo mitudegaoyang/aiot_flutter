@@ -43,6 +43,13 @@ class HomeView extends GetView<HomeController> {
               Get.to(TenantView(), binding: TenantBinding());
               // Get.toNamed('/tenant');
             },
+          ),
+          FlatButton(
+            child: Text('Go Tenant Dashboard'),
+            color: Colors.blue,
+            onPressed: () {
+              Get.toNamed('/dashboard');
+            },
           )
         ],
       ),

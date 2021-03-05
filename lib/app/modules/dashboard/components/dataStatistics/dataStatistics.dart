@@ -1,13 +1,12 @@
 // import 'dart:ui';
 
-// import 'package:get/get.dart';
+import 'package:aiot/app/modules/dashboard/controllers/dashboard_controller.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:aiot/app/modules/dashboard/components/dataCardGrid/dataCardGrid.dart';
 
 class DataStatistics extends StatelessWidget {
-  const DataStatistics({
-    Key key,
-  }) : super(key: key);
+  final DashboardController c = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +15,14 @@ class DataStatistics extends StatelessWidget {
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: <Widget>[
-            DataCardGrid(
-              title: "组织机构数",
-              num: 15,
-              colors: [Color(0xFF555DEC), Color(0xFF6D0BBD)],
+            Obx(
+              () => DataCardGrid(
+                title: "组织机构数",
+                num: c.dataStatistics.value.organizationTotal != null
+                    ? c.dataStatistics.value.organizationTotal
+                    : 0,
+                colors: [Color(0xFF555DEC), Color(0xFF6D0BBD)],
+              ),
             ),
             DataCardGrid(
               title: "用户总数",
