@@ -77,6 +77,42 @@ class TenantView extends GetView<TenantController> {
     );
   }
 
+  Widget _buildProgressIndicator() {
+    print("${c.isLoading.value}kkkk");
+    return new Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: new Center(
+        child: Obx(() {
+          return new Opacity(
+            opacity: c.isLoading.value ? 1.0 : 00,
+            child: SizedBox(
+              height: 30,
+              width: 30,
+              child: new CircularProgressIndicator(
+                strokeWidth: 2,
+              ),
+            ),
+          );
+          // if (c.tenantlist.value.data.length >=
+          //     c.tenantlist.value.totalRecords) {
+          //   return Text("没有更多了");
+          // } else {
+          //   return new Opacity(
+          //     opacity: c.isLoading.value ? 1.0 : 00,
+          //     child: SizedBox(
+          //       height: 30,
+          //       width: 30,
+          //       child: new CircularProgressIndicator(
+          //         strokeWidth: 2,
+          //       ),
+          //     ),
+          //   );
+          // }
+        }),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,15 +129,21 @@ class TenantView extends GetView<TenantController> {
         child: Column(
           children: [
             SearchBar(),
-            Expanded(
-                child: Obx(() => ListView.builder(
-                    itemCount: c.tenantlist.value.data == null
-                        ? 0
-                        : c.tenantlist.value.data.length,
-                    itemBuilder: (context, index) {
-                      final tenant = c.tenantlist.value.data[index];
-                      return _buildRow(tenant);
-                    })))
+            Expanded(child: Obx(() {
+              int len = c.tenantlist.value.data == null
+                  ? 0
+                  : c.tenantlist.value.data.length;
+              return ListView.builder(
+                  controller: c.scrollController,
+                  itemCount: len + 1,
+                  itemBuilder: (context, index) {
+                    if (index == len) {
+                      return _buildProgressIndicator();
+                    }
+                    final tenant = c.tenantlist.value.data[index];
+                    return _buildRow(tenant);
+                  });
+            }))
           ],
         ),
       ),
