@@ -26,8 +26,9 @@ class TenantProvider extends GetConnect {
       await post('tenant', tenant);
   Future<Response> deleteTenant(int id) async => await delete('tenant/$id');
 
-  Future<Response<TenantList>> getTenants(pageIndex) async =>
-      await get('/tenants?pageIndex=$pageIndex&pageSize=8',
+  Future<Response<TenantList>> getTenants(pageIndex, tenantName) async =>
+      await get(
+          '/tenants?pageIndex=$pageIndex&pageSize=8&tenantName=$tenantName',
           headers: {"Authorization": _box.read(_key)},
           decoder: (map) => TenantList.fromJson(map));
 }

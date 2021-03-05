@@ -102,6 +102,7 @@ class TenantView extends GetView<TenantController> {
           int len = c.tenantlist.value.data == null
               ? 0
               : c.tenantlist.value.data.length;
+          // print("${c.tenantlist.value.totalRecords}-----$len");
           if (len == c.tenantlist.value.totalRecords) {
             return Text("没有更多了");
           } else {
@@ -136,7 +137,7 @@ class TenantView extends GetView<TenantController> {
         decoration: BoxDecoration(),
         child: Column(
           children: [
-            SearchBar(),
+            SearchBar(onSearch: c.onSearch, onCancel: c.onCancelSearch),
             Expanded(
                 child: RefreshIndicator(
               onRefresh: c.onRefresh,

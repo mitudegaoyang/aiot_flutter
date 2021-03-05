@@ -16,7 +16,8 @@ class TenantController extends GetxController {
   // 当前页数
   final pageIndex = 1.obs;
 
-  final count = 0.obs;
+  final tenantName = "".obs;
+
   final tenantlist = TenantList().obs;
 
   List<Tenant> tmpList = new List(); //临时存储租户列表
@@ -62,12 +63,10 @@ class TenantController extends GetxController {
     scrollController.dispose();
   }
 
-  void increment() => count.value++;
-
   void _getMoreData() async {
     if (isLoading != null) {
       print(pageIndex.value);
-      tenantProvider.getTenants(pageIndex.value).then(
+      tenantProvider.getTenants(pageIndex.value, tenantName.value).then(
         (data) {
           tenantlist.value = data.body;
           tmpList.addAll(data.body.data);
@@ -88,6 +87,22 @@ class TenantController extends GetxController {
 
 //下拉刷新
   Future<void> onRefresh() async {
+    tmpList.clear();
+    isLoading.value = true;
+    pageIndex.value = 1;
+    _getMoreData();
+  }
+
+  Future<void> onSearch(String name) async {
+    tenantName.value = name;
+    tmpList.clear();
+    isLoading.value = true;
+    pageIndex.value = 1;
+    _getMoreData();
+  }
+
+  Future<void> onCancelSearch() async {
+    tenantName.value = "";
     tmpList.clear();
     isLoading.value = true;
     pageIndex.value = 1;

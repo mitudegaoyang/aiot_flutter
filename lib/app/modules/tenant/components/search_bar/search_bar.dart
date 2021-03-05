@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SearchBar extends StatefulWidget {
-  SearchBar({Key key}) : super(key: key);
+  SearchBar({Key key, this.onSearch, this.onCancel}) : super(key: key);
+
+  final Function onSearch;
+  final Function onCancel;
+
   @override
   _SearchBarState createState() => _SearchBarState();
 }
@@ -27,6 +31,7 @@ class _SearchBarState extends State<SearchBar> {
   void handleCancel() {
     _toggleShowButton(false);
     _controller.clear();
+    widget.onCancel();
     // 失去焦点
     FocusScope.of(context).requestFocus(FocusNode());
   }
@@ -64,6 +69,7 @@ class _SearchBarState extends State<SearchBar> {
                   child: TextField(
                     cursorColor: Color(0xff4953ed),
                     onChanged: (text) {
+                      widget.onSearch(text);
                       if (text.length > 0) {
                         _toggleShowButton(true);
                         _toggleShowSuffixButton(true);
@@ -82,6 +88,7 @@ class _SearchBarState extends State<SearchBar> {
                           ? Container(
                               child: GestureDetector(
                               onTap: () {
+                                widget.onCancel();
                                 _controller.clear();
                                 _toggleShowSuffixButton(false);
                               },
