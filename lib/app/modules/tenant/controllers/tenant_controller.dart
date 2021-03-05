@@ -68,14 +68,18 @@ class TenantController extends GetxController {
       print(pageIndex.value);
       tenantProvider.getTenants(pageIndex.value, tenantName.value).then(
         (data) {
+          // Future.delayed(const Duration(milliseconds: 1000), () {
+          //   tenantlist.value = data.body;
+          //   tmpList.addAll(data.body.data);
+          //   tenantlist.value.data = tmpList;
+          //   pageIndex.value = data.body.pageIndex + 1;
+          //   isLoading.value = false;
+          // });
           tenantlist.value = data.body;
           tmpList.addAll(data.body.data);
           tenantlist.value.data = tmpList;
           pageIndex.value = data.body.pageIndex + 1;
-          Future.delayed(const Duration(milliseconds: 3000), () {
-            isLoading.value = false;
-          });
-          // isLoading.value = false;
+          isLoading.value = false;
         },
         onError: (err) {
           isLoading.value = false;

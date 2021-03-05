@@ -90,6 +90,11 @@ class TenantView extends GetView<TenantController> {
             }
             final tenant = c.tenantlist.value.data[index];
             return _buildRow(tenant);
+            // if (tenant != null) {
+            //   return _buildRow(tenant);
+            // } else {
+            //   return Text("");
+            // }
           });
     });
   }
