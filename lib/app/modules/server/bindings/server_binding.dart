@@ -1,4 +1,4 @@
-import 'package:aiot/app/modules/server/services/db_service.dart';
+import 'package:aiot/app/modules/server/repositories/server.dart';
 import 'package:get/get.dart';
 
 import '../controllers/server_controller.dart';
@@ -6,12 +6,13 @@ import '../controllers/server_controller.dart';
 class ServerBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<DbService>(
-      () => DbService(),
+    // Get.put<DbService>(DbService());
+    // Get.put<DbService>(DbService());
+    Get.lazyPut<ServerRepository>(
+      () => ServerRepository(),
     );
-
     Get.lazyPut<ServerController>(
-      () => ServerController(dbService: Get.find()),
+      () => ServerController(Get.find()),
     );
   }
 }

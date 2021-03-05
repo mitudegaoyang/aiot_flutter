@@ -11,4 +11,8 @@ class ServerTable {
       PRIMARY KEY("id" AUTOINCREMENT)
     );
   ''';
+
+  static const String addAliasColumnQuery = '''
+    ALTER TABLE ${ServerTable.tableName} ADD COLUMN "alias" text;
+  ''';
 }
