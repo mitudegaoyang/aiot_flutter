@@ -27,7 +27,7 @@ class MainApp extends StatelessWidget {
       initialBinding: ServerBinding(),
       title: "Application",
       theme: ThemeData(platform: TargetPlatform.iOS),
-      // initialRoute: AppPages.INITIAL,
+      initialRoute: AppPages.INITIAL,
       onGenerateRoute: AppPages.onGenerateRoute,
       // getPages: AppPages.routes,
     );
