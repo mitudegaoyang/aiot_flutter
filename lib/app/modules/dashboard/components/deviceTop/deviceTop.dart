@@ -16,13 +16,6 @@ class DeviceTop extends StatelessWidget {
         children: <Widget>[
           Container(
             width: double.infinity,
-            // decoration: BoxDecoration(
-            //   border: Border.all(
-            //     color: Colors.red,
-            //     width: 3,
-            //     style: BorderStyle.solid,
-            //   ),
-            // ),
             padding: const EdgeInsets.only(
                 right: 12.0, left: 12.0, top: 50, bottom: 12),
             child: BarChart(
