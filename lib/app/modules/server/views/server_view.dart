@@ -15,6 +15,8 @@ import '../controllers/server_controller.dart';
 
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
+// https://www.jianshu.com/p/e74286d2e14c
+
 class ServerView extends GetView<ServerController> {
   final ServerController c = Get.find();
 
@@ -46,8 +48,8 @@ class ServerView extends GetView<ServerController> {
               child: Column(
                 children: [
                   ServerItem(),
-                  ServerItem(),
-                  ServerItem(),
+                  // ServerItem(),
+                  // ServerItem(),
                   ListTile(
                     title: Text('Home'),
                     leading: Icon(Icons.home),
@@ -103,11 +105,7 @@ class ServerItem extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(
           horizontal: kDefaultPadding, vertical: kDefaultPadding / 4),
-      decoration: BoxDecoration(
-          // color: Colors.red,
-          ),
       child: Container(
-        padding: EdgeInsets.all(kDefaultPadding / 2),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.0),
           color: const Color(0xffffffff),
@@ -119,57 +117,102 @@ class ServerItem extends StatelessWidget {
             ),
           ],
         ),
-        child: Row(
-          children: [
-            Container(
-              width: 44,
-              height: 44,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                gradient: kPrimaryGradient,
-              ),
+        child: Material(
+          borderRadius: BorderRadius.circular(16.0),
+          color: Colors.white,
+          child: Ink(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16.0),
+              // color: const Color(0xffffffff),
+              // color: Colors.red,
             ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: kDefaultPadding / 2),
-              child: Column(
-                children: [
-                  Text(
-                    'MacBook Pro',
-                    style: TextStyle(
-                        color: kNeutralDarkBlueColor,
-                        fontSize: 16,
-                        letterSpacing: 0,
-                        fontWeight: FontWeight.normal,
-                        height: 1),
-                  ),
-                  SizedBox(
-                    height: kDefaultPadding / 4,
-                  ),
-                  Text(
-                    'Order #792462',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: const Color(0xff91909a),
+            child: new InkWell(
+              borderRadius: new BorderRadius.circular(16.0), //给水波纹也设置同样的圆角
+              onTap: () {
+                print('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%');
+              },
+              child: new Container(
+                padding: EdgeInsets.all(kDefaultPadding / 2),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 44,
+                      height: 44,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        gradient: kPrimaryGradient,
+                      ),
                     ),
-                    textAlign: TextAlign.left,
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Container(
-                child: Text(
-                  '+\$275,85',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: const Color(0xff4953ed),
-                  ),
-                  textAlign: TextAlign.right,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: kDefaultPadding / 2),
+                      child: Column(
+                        children: [
+                          Text(
+                            'MacBook Pro',
+                            style: TextStyle(
+                                color: kNeutralDarkBlueColor,
+                                fontSize: 16,
+                                letterSpacing: 0,
+                                fontWeight: FontWeight.normal,
+                                height: 1),
+                          ),
+                          SizedBox(
+                            height: kDefaultPadding / 4,
+                          ),
+                          Text(
+                            'Order #792462',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: const Color(0xff91909a),
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        child: Text(
+                          '+\$275,85',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: const Color(0xff4953ed),
+                          ),
+                          textAlign: TextAlign.right,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-          ],
+            // child: InkWell(
+
+            //   onTap: () {},
+            //   child: Container(
+            //     child: Container(
+            //       padding: EdgeInsets.all(kDefaultPadding / 2),
+            //       decoration: BoxDecoration(
+            //         borderRadius: BorderRadius.circular(16.0),
+            //         color: const Color(0xffffffff),
+            //         // color: Colors.red,
+            //         boxShadow: [
+            //           BoxShadow(
+            //             color: const Color(0x1a000000),
+            //             offset: Offset(3, 5),
+            //             blurRadius: 22,
+            //           ),
+            //         ],
+            //       ),
+            //       child: Container(
+            //         // margin: EdgeInsets.all(kDefaultPadding / 2),
+            // ,
+            //       ),
+            //     ),
+            //   ),
+            // ),
+          ),
         ),
       ),
     );
