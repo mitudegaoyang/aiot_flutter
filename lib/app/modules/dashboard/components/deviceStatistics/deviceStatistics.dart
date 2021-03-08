@@ -24,8 +24,48 @@ class _LineChartAiotState extends State<DeviceStatistics> {
     const Color(0xff02d39a),
   ];
 
+  List data = [
+    {"yactive": 2, "ytotal": 3, "xtime": 1612800000000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1612886400000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1612972800000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1613059200000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1613145600000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1613232000000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1613318400000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1613404800000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1613491200000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1613577600000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1613664000000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1613750400000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1613836800000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1613923200000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1614009600000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1614096000000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1614182400000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1614268800000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1614355200000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1614441600000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1614528000000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1614614400000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1614700800000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1614787200000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1614873600000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1614960000000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1615046400000},
+    {"yactive": 2, "ytotal": 3, "xtime": 1615132800000}
+  ];
+  List<FlSpot> yactive = [];
+  List<FlSpot> ytotal = [];
+
   @override
   Widget build(BuildContext context) {
+    yactive = [];
+    ytotal = [];
+    data.forEach((value) {
+      yactive
+          .add(FlSpot(value["xtime"].toDouble(), value["yactive"].toDouble()));
+      ytotal.add(FlSpot(value["xtime"].toDouble(), value["ytotal"].toDouble()));
+    });
     return Center(
       child: Stack(
         children: <Widget>[
@@ -121,42 +161,13 @@ class _LineChartAiotState extends State<DeviceStatistics> {
       // maxX: 12,
       minY: 0,
       // maxY: 6,
-      lineBarsData: linesBarData1(),
+      lineBarsData: linesBarData(),
     );
   }
 
-  List<LineChartBarData> linesBarData1() {
-    final LineChartBarData lineChartBarData1 = LineChartBarData(
-      spots: [
-        FlSpot(1612800000000, 3),
-        FlSpot(1612886400000, 2),
-        FlSpot(1612972800000, 5),
-        FlSpot(1613059200000, 3.1),
-        FlSpot(1613145600000, 4),
-        FlSpot(1613232000000, 3),
-        FlSpot(1613318400000, 4),
-        FlSpot(1613404800000, 6),
-        FlSpot(1613491200000, 6),
-        FlSpot(1613577600000, 6),
-        FlSpot(1613664000000, 3),
-        FlSpot(1613750400000, 6),
-        FlSpot(1613836800000, 6),
-        FlSpot(1613923200000, 60),
-        FlSpot(1614009600000, 6),
-        FlSpot(1614096000000, 6),
-        FlSpot(1614182400000, 6),
-        FlSpot(1614268800000, 6),
-        FlSpot(1614355200000, 6),
-        FlSpot(1614441600000, 6),
-        FlSpot(1614528000000, 6),
-        FlSpot(1614614400000, 6),
-        FlSpot(1614700800000, 6),
-        FlSpot(1614787200000, 6),
-        FlSpot(1614873600000, 6),
-        FlSpot(1614960000000, 60),
-        FlSpot(1615046400000, 6),
-        FlSpot(1615132800000, 6),
-      ],
+  List<LineChartBarData> linesBarData() {
+    final LineChartBarData lineChartBarDataTotal = LineChartBarData(
+      spots: ytotal,
       isCurved: true,
       colors: gradientColors,
       barWidth: 5,
@@ -170,37 +181,8 @@ class _LineChartAiotState extends State<DeviceStatistics> {
       ),
     );
 
-    final LineChartBarData lineChartBarData2 = LineChartBarData(
-      spots: [
-        FlSpot(1612800000000, 36),
-        FlSpot(1612886400000, 20),
-        FlSpot(1612972800000, 50),
-        FlSpot(1613059200000, 3.1),
-        FlSpot(1613145600000, 41),
-        FlSpot(1613232000000, 32),
-        FlSpot(1613318400000, 4),
-        FlSpot(1613404800000, 16),
-        FlSpot(1613491200000, 16),
-        FlSpot(1613577600000, 16),
-        FlSpot(1613664000000, 13),
-        FlSpot(1613750400000, 16),
-        FlSpot(1613836800000, 16),
-        FlSpot(1613923200000, 16),
-        FlSpot(1614009600000, 16),
-        FlSpot(1614096000000, 16),
-        FlSpot(1614182400000, 16),
-        FlSpot(1614268800000, 16),
-        FlSpot(1614355200000, 16),
-        FlSpot(1614441600000, 16),
-        FlSpot(1614528000000, 16),
-        FlSpot(1614614400000, 16),
-        FlSpot(1614700800000, 16),
-        FlSpot(1614787200000, 16),
-        FlSpot(1614873600000, 16),
-        FlSpot(1614960000000, 10),
-        FlSpot(1615046400000, 16),
-        FlSpot(1615132800000, 16),
-      ],
+    final LineChartBarData lineChartBarDataActive = LineChartBarData(
+      spots: yactive,
       isCurved: true,
       colors: gradientColors2,
       barWidth: 5,
@@ -213,6 +195,7 @@ class _LineChartAiotState extends State<DeviceStatistics> {
         colors: gradientColors2.map((color) => color.withOpacity(0.3)).toList(),
       ),
     );
-    return [lineChartBarData1, lineChartBarData2];
+
+    return [lineChartBarDataTotal, lineChartBarDataActive];
   }
 }
