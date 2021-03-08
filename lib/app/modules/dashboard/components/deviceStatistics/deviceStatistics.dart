@@ -3,6 +3,7 @@
 // import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:day/day.dart';
 
 class DeviceStatistics extends StatefulWidget {
   const DeviceStatistics({
@@ -16,6 +17,10 @@ class DeviceStatistics extends StatefulWidget {
 class _LineChartAiotState extends State<DeviceStatistics> {
   List<Color> gradientColors = [
     const Color(0xff23b6e6),
+    const Color(0xff23e6e6),
+  ];
+  List<Color> gradientColors2 = [
+    const Color(0xff02a39a),
     const Color(0xff02d39a),
   ];
 
@@ -25,17 +30,16 @@ class _LineChartAiotState extends State<DeviceStatistics> {
       child: Stack(
         children: <Widget>[
           Container(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                  right: 12.0, left: 12.0, top: 24, bottom: 12),
-              child: LineChart(
-                mainData(),
-              ),
+            width: double.infinity,
+            padding: const EdgeInsets.only(
+                right: 0.0, left: 0.0, top: 50, bottom: 12),
+            child: LineChart(
+              mainData(),
             ),
           ),
           Positioned(
             top: 20,
-            left: 0,
+            left: 34,
             child: Text(
               '设备统计',
               style: TextStyle(
@@ -73,13 +77,16 @@ class _LineChartAiotState extends State<DeviceStatistics> {
         bottomTitles: SideTitles(
           showTitles: true, // 是否显示x轴图例
           reservedSize: 22,
+          interval: 86400000,
           getTextStyles: (value) => const TextStyle(
               color: Color(0xff68737d),
               fontWeight: FontWeight.bold,
               fontSize: 16),
           getTitles: (value) {
-            if (value.toInt() % 2 == 0) {
-              return value.toInt().toString() + '月';
+            final d = Day.fromUnix(value.toInt());
+            final now = Day().add(4, 'd');
+            if (now.diff(d, 'd') % 7 == 0) {
+              return d.format('MM/DD');
             }
             return '';
           },
@@ -110,10 +117,10 @@ class _LineChartAiotState extends State<DeviceStatistics> {
       borderData: FlBorderData(
           show: false, // 是否显示边框
           border: Border.all(color: const Color(0xff37434d), width: 1)),
-      minX: 1,
-      maxX: 11,
+      // minX: 1,
+      // maxX: 12,
       minY: 0,
-      maxY: 6,
+      // maxY: 6,
       lineBarsData: linesBarData1(),
     );
   }
@@ -121,14 +128,34 @@ class _LineChartAiotState extends State<DeviceStatistics> {
   List<LineChartBarData> linesBarData1() {
     final LineChartBarData lineChartBarData1 = LineChartBarData(
       spots: [
-        FlSpot(0, 3),
-        FlSpot(2.6, 2),
-        FlSpot(4.9, 5),
-        FlSpot(6.8, 3.1),
-        FlSpot(8, 4),
-        FlSpot(9.5, 3),
-        FlSpot(11, 4),
-        FlSpot(12, 6),
+        FlSpot(1612800000000, 3),
+        FlSpot(1612886400000, 2),
+        FlSpot(1612972800000, 5),
+        FlSpot(1613059200000, 3.1),
+        FlSpot(1613145600000, 4),
+        FlSpot(1613232000000, 3),
+        FlSpot(1613318400000, 4),
+        FlSpot(1613404800000, 6),
+        FlSpot(1613491200000, 6),
+        FlSpot(1613577600000, 6),
+        FlSpot(1613664000000, 3),
+        FlSpot(1613750400000, 6),
+        FlSpot(1613836800000, 6),
+        FlSpot(1613923200000, 60),
+        FlSpot(1614009600000, 6),
+        FlSpot(1614096000000, 6),
+        FlSpot(1614182400000, 6),
+        FlSpot(1614268800000, 6),
+        FlSpot(1614355200000, 6),
+        FlSpot(1614441600000, 6),
+        FlSpot(1614528000000, 6),
+        FlSpot(1614614400000, 6),
+        FlSpot(1614700800000, 6),
+        FlSpot(1614787200000, 6),
+        FlSpot(1614873600000, 6),
+        FlSpot(1614960000000, 60),
+        FlSpot(1615046400000, 6),
+        FlSpot(1615132800000, 6),
       ],
       isCurved: true,
       colors: gradientColors,
@@ -138,10 +165,54 @@ class _LineChartAiotState extends State<DeviceStatistics> {
         show: false,
       ),
       belowBarData: BarAreaData(
-        show: true,
+        show: false, // 是否显示面积图
         colors: gradientColors.map((color) => color.withOpacity(0.3)).toList(),
       ),
     );
-    return [lineChartBarData1];
+
+    final LineChartBarData lineChartBarData2 = LineChartBarData(
+      spots: [
+        FlSpot(1612800000000, 36),
+        FlSpot(1612886400000, 20),
+        FlSpot(1612972800000, 50),
+        FlSpot(1613059200000, 3.1),
+        FlSpot(1613145600000, 41),
+        FlSpot(1613232000000, 32),
+        FlSpot(1613318400000, 4),
+        FlSpot(1613404800000, 16),
+        FlSpot(1613491200000, 16),
+        FlSpot(1613577600000, 16),
+        FlSpot(1613664000000, 13),
+        FlSpot(1613750400000, 16),
+        FlSpot(1613836800000, 16),
+        FlSpot(1613923200000, 16),
+        FlSpot(1614009600000, 16),
+        FlSpot(1614096000000, 16),
+        FlSpot(1614182400000, 16),
+        FlSpot(1614268800000, 16),
+        FlSpot(1614355200000, 16),
+        FlSpot(1614441600000, 16),
+        FlSpot(1614528000000, 16),
+        FlSpot(1614614400000, 16),
+        FlSpot(1614700800000, 16),
+        FlSpot(1614787200000, 16),
+        FlSpot(1614873600000, 16),
+        FlSpot(1614960000000, 10),
+        FlSpot(1615046400000, 16),
+        FlSpot(1615132800000, 16),
+      ],
+      isCurved: true,
+      colors: gradientColors2,
+      barWidth: 5,
+      isStrokeCapRound: true,
+      dotData: FlDotData(
+        show: false,
+      ),
+      belowBarData: BarAreaData(
+        show: false, // 是否显示面积图
+        colors: gradientColors2.map((color) => color.withOpacity(0.3)).toList(),
+      ),
+    );
+    return [lineChartBarData1, lineChartBarData2];
   }
 }
