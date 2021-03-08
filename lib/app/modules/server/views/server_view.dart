@@ -34,7 +34,7 @@ class ServerView extends GetView<ServerController> {
               child: Icon(Icons.arrow_forward),
               onTap: () {
                 showCupertinoModalBottomSheet(
-                  expand: true,
+                  expand: false,
                   context: context,
                   backgroundColor: Colors.transparent,
                   builder: (context) => AddView(),
