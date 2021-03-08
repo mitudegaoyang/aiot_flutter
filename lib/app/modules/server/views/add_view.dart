@@ -70,27 +70,27 @@ class _AddViewState extends State<AddView> {
                             _handleCancel();
                           },
                           child: Text(
-                            "取消",
+                            "Cancel",
                             style: TextStyle(fontSize: 20),
                           )),
                       TextButton(
                           onPressed: _forSubmitted,
                           child: Text(
-                            "保存",
+                            "Save",
                             style: TextStyle(fontSize: 20),
                           )),
                     ],
                   ),
                 ),
                 Container(
-                  width: Get.width - 48,
+                  width: Get.width - 60,
                   margin: EdgeInsets.only(top: 20, left: 30, right: 30),
                   child: Form(
                     key: _formKey,
                     child: Column(children: [
                       TextFormField(
                           decoration: InputDecoration(
-                            hintText: '请输入别名',
+                            hintText: 'Name',
                             filled: true,
                             fillColor: Color(0xFFF5F6FA),
                             contentPadding:
@@ -112,7 +112,7 @@ class _AddViewState extends State<AddView> {
                         margin: EdgeInsets.only(top: 20),
                         child: TextFormField(
                             decoration: InputDecoration(
-                              hintText: '请输入ip',
+                              hintText: 'Ip',
                               filled: true,
                               fillColor: Color(0xFFF5F6FA),
                               contentPadding:
@@ -135,7 +135,7 @@ class _AddViewState extends State<AddView> {
                         margin: EdgeInsets.only(top: 20),
                         child: TextFormField(
                             decoration: InputDecoration(
-                              hintText: '请输入账号',
+                              hintText: 'Account',
                               filled: true,
                               fillColor: Color(0xFFF5F6FA),
                               contentPadding:
@@ -159,7 +159,7 @@ class _AddViewState extends State<AddView> {
                         child: TextFormField(
                             obscureText: !showPwd,
                             decoration: InputDecoration(
-                                hintText: '请输入密码',
+                                hintText: 'Password',
                                 filled: true,
                                 fillColor: Color(0xFFF5F6FA),
                                 contentPadding:
