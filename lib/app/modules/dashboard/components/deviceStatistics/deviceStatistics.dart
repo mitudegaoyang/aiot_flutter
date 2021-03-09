@@ -167,6 +167,18 @@ class _LineChartAiotState extends State<DeviceStatistics> {
       // maxX: 12,
       minY: 0,
       // maxY: 6,
+      lineTouchData: LineTouchData(
+        touchTooltipData: LineTouchTooltipData(
+            tooltipBgColor: Color(0x00555DEC),
+            getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
+              return touchedBarSpots.map((barSpot) {
+                return LineTooltipItem(
+                  '${barSpot.barIndex == 0 ? '总数' : '激活'} ${barSpot.y.toInt()}',
+                  const TextStyle(color: Colors.grey),
+                );
+              }).toList();
+            }),
+      ),
       lineBarsData: linesBarData(),
     );
   }
