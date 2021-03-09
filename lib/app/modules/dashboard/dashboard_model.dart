@@ -53,3 +53,25 @@ class DataStatistics {
     return data;
   }
 }
+
+class DeviceTop {
+  String deviceName;
+  int deviceNum;
+  String rate;
+
+  DeviceTop({deviceName, deviceNum, rate});
+
+  DeviceTop.fromJson(Map<String, dynamic> json) {
+    deviceName = json['deviceName'];
+    deviceNum = json['deviceNum'];
+    rate = json['rate'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['deviceName'] = deviceName;
+    data['deviceNum'] = deviceNum;
+    data['rate'] = rate;
+    return data;
+  }
+}

@@ -1,13 +1,17 @@
 // import 'dart:ui';
 
 // import 'package:get/get.dart';
+import 'package:aiot/app/modules/dashboard/controllers/dashboard_controller.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 class DeviceTop extends StatelessWidget {
-  const DeviceTop({
-    Key key,
-  }) : super(key: key);
+  // const DeviceTop({
+  //   Key key,
+  // }) : super(key: key);
+
+  final DashboardController c = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +61,9 @@ class DeviceTop extends StatelessWidget {
                     ),
                     margin: 20,
                     getTitles: (double value) {
+                      // Obx(() => c.deviceTop.value == null
+                      //     ? ''
+                      //     : c.deviceTop.value.map());
                       switch (value.toInt()) {
                         case 0:
                           return 'Mn';

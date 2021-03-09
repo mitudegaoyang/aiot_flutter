@@ -1,3 +1,4 @@
+import 'package:aiot/app/modules/dashboard/components/dataCardGrid/dataCardGrid.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -31,6 +32,15 @@ class DashboardProvider extends GetConnect {
       'http://$ip/api/v1/dashboard/device/trend?type=0',
       headers: {"Authorization": _box.read(_key)},
       decoder: (list) => TrendList.fromJson(list),
+    );
+  }
+
+  Future<Response<DeviceTop>> getDeviceTop(data) async {
+    String ip = _box.read('IP');
+    return await get(
+      'http://$ip/api/v1/dashboard/device/top',
+      headers: {"Authorization": _box.read(_key)},
+      decoder: (list) => DeviceTop.fromJson(list),
     );
   }
 }

@@ -13,6 +13,7 @@ class DashboardController extends GetxController {
   final dataStatistics = DataStatistics().obs;
   // final trendList = DataStatistics().obs;
   final trendList = TrendList().obs;
+  final deviceTop = DeviceTop().obs;
   final count = 0.obs;
 
   @override
@@ -28,6 +29,12 @@ class DashboardController extends GetxController {
       // print(trendList.value.data);
       // trendList.value = data.body.data.toList();
       // trendList.value = {'data': data};
+    });
+
+    dashboardProvider.getDeviceTop({}).then((data) {
+      // print(data.body.toJson());
+      // print('=====');
+      deviceTop.value = data.body;
     });
   }
 
