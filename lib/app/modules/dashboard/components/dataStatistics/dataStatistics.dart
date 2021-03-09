@@ -10,6 +10,8 @@ class DataStatistics extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('c.dataStatistics.value.organizationTotal');
+    print(c.dataStatistics.value.organizationTotal);
     return SizedBox.expand(
       child: Container(
         child: ListView(

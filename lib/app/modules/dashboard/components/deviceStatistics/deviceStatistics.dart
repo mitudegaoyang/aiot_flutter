@@ -64,8 +64,7 @@ class _LineChartAiotState extends State<DeviceStatistics> {
   Widget build(BuildContext context) {
     yactive = [];
     ytotal = [];
-    print(c.trendList.value.data);
-    if (c.trendList.value.data != null) {
+    if (data != null) {
       data.forEach((value) {
         yactive.add(
             FlSpot(value["xtime"].toDouble(), value["yactive"].toDouble()));
