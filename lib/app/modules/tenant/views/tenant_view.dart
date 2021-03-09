@@ -132,13 +132,21 @@ class TenantView extends GetView<TenantController> {
   Widget build(BuildContext context) {
     final TenantController c = Get.find();
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.white,
-      //   elevation: 0,
-      // ),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text(
+          'Tenant',
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
+        centerTitle: true,
+        elevation: 0,
+      ),
       body: Container(
         padding: EdgeInsets.only(
-            top: getProportionateScreenWidth(50),
+            top: getProportionateScreenWidth(10),
             left: getProportionateScreenWidth(28),
             right: getProportionateScreenWidth(28)),
         decoration: BoxDecoration(),
@@ -146,10 +154,11 @@ class TenantView extends GetView<TenantController> {
           children: [
             SearchBar(onSearch: c.onSearch, onCancel: c.onCancelSearch),
             Expanded(
-                child: RefreshIndicator(
-              onRefresh: c.onRefresh,
-              child: _buildList(),
-            ))
+              child: RefreshIndicator(
+                onRefresh: c.onRefresh,
+                child: _buildList(),
+              ),
+            ),
           ],
         ),
       ),
