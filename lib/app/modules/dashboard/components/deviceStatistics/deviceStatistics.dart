@@ -1,6 +1,7 @@
 // import 'dart:ui';
 
 import 'package:aiot/app/modules/dashboard/controllers/dashboard_controller.dart';
+import 'package:aiot/app/modules/dashboard/trend_model.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -16,8 +17,6 @@ class DeviceStatistics extends StatefulWidget {
 }
 
 class _LineChartAiotState extends State<DeviceStatistics> {
-  final DashboardController c = Get.find();
-  // final DashboardController c = Get.find<DashboardController>();
   List<Color> gradientColors = [
     const Color(0xff23b6e6),
     const Color(0xff23e6e6),
@@ -27,51 +26,44 @@ class _LineChartAiotState extends State<DeviceStatistics> {
     const Color(0xff02d39a),
   ];
 
-  List data = [
-    {"yactive": 2, "ytotal": 3, "xtime": 1612800000000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1612886400000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1612972800000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1613059200000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1613145600000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1613232000000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1613318400000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1613404800000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1613491200000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1613577600000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1613664000000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1613750400000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1613836800000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1613923200000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1614009600000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1614096000000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1614182400000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1614268800000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1614355200000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1614441600000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1614528000000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1614614400000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1614700800000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1614787200000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1614873600000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1614960000000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1615046400000},
-    {"yactive": 2, "ytotal": 3, "xtime": 1615132800000}
-  ];
+  // List data = [
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1612800000000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1612886400000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1612972800000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1613059200000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1613145600000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1613232000000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1613318400000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1613404800000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1613491200000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1613577600000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1613664000000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1613750400000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1613836800000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1613923200000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1614009600000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1614096000000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1614182400000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1614268800000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1614355200000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1614441600000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1614528000000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1614614400000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1614700800000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1614787200000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1614873600000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1614960000000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1615046400000},
+  //   {"yactive": 2, "ytotal": 3, "xtime": 1615132800000}
+  // ];
   List<FlSpot> yactive = [];
   List<FlSpot> ytotal = [];
 
   @override
   Widget build(BuildContext context) {
+    final DashboardController c = Get.find();
     yactive = [];
     ytotal = [];
-    if (data != null) {
-      data.forEach((value) {
-        yactive.add(
-            FlSpot(value["xtime"].toDouble(), value["yactive"].toDouble()));
-        ytotal
-            .add(FlSpot(value["xtime"].toDouble(), value["ytotal"].toDouble()));
-      });
-    }
     return Center(
       child: Stack(
         children: <Widget>[
@@ -79,14 +71,13 @@ class _LineChartAiotState extends State<DeviceStatistics> {
             width: double.infinity,
             padding: const EdgeInsets.only(
                 right: 0.0, left: 0.0, top: 50, bottom: 12),
-            child: LineChart(
-              mainData(),
+            child: Obx(
+              () => c.trendList.length > 0
+                  ? LineChart(
+                      mainData(c.trendList),
+                    )
+                  : Text('暂无数据'),
             ),
-            // child: Obx(
-            //   () => LineChart(
-            //     mainData(),
-            //   ),
-            // ),
           ),
           Positioned(
             top: 20,
@@ -105,7 +96,11 @@ class _LineChartAiotState extends State<DeviceStatistics> {
     );
   }
 
-  LineChartData mainData() {
+  LineChartData mainData(c) {
+    for (Trend t in c) {
+      yactive.add(FlSpot(t.xtime.toDouble(), t.yactive.toDouble()));
+      ytotal.add(FlSpot(t.xtime.toDouble(), t.ytotal.toDouble()));
+    }
     return LineChartData(
       gridData: FlGridData(
         show: false, // 网格线
