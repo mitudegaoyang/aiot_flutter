@@ -1,4 +1,5 @@
 import 'package:aiot/app/modules/tenant/providers/tenant_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import '../tenant_model.dart';
@@ -33,7 +34,7 @@ class TenantController extends GetxController {
         // print('滑动到了最底部');
         isLoading.value = true;
         if (tmpList.length == tenantlist.value.totalRecords) {
-          print("没有更多了");
+          // print("没有更多了");
         } else {
           _getMoreData();
         }
@@ -65,20 +66,29 @@ class TenantController extends GetxController {
 
   void _getMoreData() async {
     if (isLoading != null) {
-      print(pageIndex.value);
       tenantProvider.getTenants(pageIndex.value, tenantName.value).then(
         (data) {
-          // Future.delayed(const Duration(milliseconds: 1000), () {
-          //   tenantlist.value = data.body;
-          //   tmpList.addAll(data.body.data);
-          //   tenantlist.value.data = tmpList;
-          //   pageIndex.value = data.body.pageIndex + 1;
-          //   isLoading.value = false;
-          // });
-          tenantlist.value = data.body;
-          tmpList.addAll(data.body.data);
-          tenantlist.value.data = tmpList;
-          pageIndex.value = data.body.pageIndex + 1;
+          if (data.body.totalRecords == null) {
+            showDialog(
+              context: Get.context,
+              builder: (BuildContext context) => CupertinoAlertDialog(
+                title: new Text("错误"),
+                content: new Text("请求接口失败！"),
+                actions: <Widget>[
+                  CupertinoDialogAction(
+                    isDefaultAction: true,
+                    child: Text('OK'),
+                    onPressed: () => Navigator.of(context).pop(false),
+                  )
+                ],
+              ),
+            );
+          } else {
+            tenantlist.value = data.body;
+            tmpList.addAll(data.body.data);
+            tenantlist.value.data = tmpList;
+            pageIndex.value = data.body.pageIndex + 1;
+          }
           isLoading.value = false;
         },
         onError: (err) {
