@@ -103,3 +103,25 @@ class DataStatisticsRatio {
     return data;
   }
 }
+
+class Trend {
+  int yactive;
+  int ytotal;
+  int xtime;
+
+  Trend({yactive, ytotal, xtime});
+
+  Trend.fromJson(Map<String, dynamic> json) {
+    yactive = json['yactive'];
+    ytotal = json['ytotal'];
+    xtime = json['xtime'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['yactive'] = yactive;
+    data['ytotal'] = ytotal;
+    data['xtime'] = xtime;
+    return data;
+  }
+}

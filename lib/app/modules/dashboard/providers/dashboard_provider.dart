@@ -1,9 +1,8 @@
-import 'package:aiot/app/modules/dashboard/components/dataCardGrid/dataCardGrid.dart';
+// import 'package:aiot/app/modules/dashboard/components/dataCardGrid/dataCardGrid.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'package:aiot/app/modules/dashboard/dashboard_model.dart';
-import 'package:aiot/app/modules/dashboard/trend_model.dart';
 // import 'package:aiot/config.dart';
 
 class DashboardProvider extends GetConnect {
@@ -26,12 +25,31 @@ class DashboardProvider extends GetConnect {
     );
   }
 
-  Future<Response<TrendList>> getDeviceTrend(String type) async {
+  Future<Response<List<dynamic>>> getDeviceTrend(String type) async {
     String ip = _box.read('IP');
     return await get(
       'http://$ip/api/v1/dashboard/device/trend?type=$type',
       headers: {"Authorization": _box.read(_key)},
-      decoder: (list) => TrendList.fromJson(list),
+      // decoder: (list) => TrendList.fromJson(list),
+      decoder: (json) {
+        if (json != null) {
+          json.sort(
+            (left, right) {
+              return left['xtime']
+                          .toDouble()
+                          .compareTo(right['xtime'].toDouble()) ==
+                      1
+                  ? 1
+                  : -1;
+            },
+          );
+          List<Trend> tmpList = new List();
+          (json as List).forEach((v) {
+            tmpList.add(new Trend.fromJson(v));
+          });
+          return tmpList;
+        }
+      },
     );
   }
 

@@ -23,10 +23,10 @@ class DashboardController extends GetxController {
       dataStatistics.value = data.body;
     });
     dashboardProvider.getDeviceTrend('0').then((data) {
-      trendList.assignAll(data.body.data);
+      trendList.assignAll(data.body);
     });
     dashboardProvider.getDeviceTrend('1').then((data) {
-      trendListYear.assignAll(data.body.data);
+      trendListYear.assignAll(data.body);
     });
 
     dashboardProvider.getDeviceTop().then((data) {

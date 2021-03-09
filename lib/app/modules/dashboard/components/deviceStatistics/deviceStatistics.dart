@@ -1,7 +1,7 @@
 // import 'dart:ui';
 
 import 'package:aiot/app/modules/dashboard/controllers/dashboard_controller.dart';
-import 'package:aiot/app/modules/dashboard/trend_model.dart';
+import 'package:aiot/app/modules/dashboard/dashboard_model.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
