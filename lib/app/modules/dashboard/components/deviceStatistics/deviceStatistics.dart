@@ -1,6 +1,7 @@
 // import 'dart:ui';
 
-// import 'package:get/get.dart';
+import 'package:aiot/app/modules/dashboard/controllers/dashboard_controller.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:day/day.dart';
@@ -15,6 +16,8 @@ class DeviceStatistics extends StatefulWidget {
 }
 
 class _LineChartAiotState extends State<DeviceStatistics> {
+  final DashboardController c = Get.find();
+  // final DashboardController c = Get.find<DashboardController>();
   List<Color> gradientColors = [
     const Color(0xff23b6e6),
     const Color(0xff23e6e6),
@@ -61,11 +64,15 @@ class _LineChartAiotState extends State<DeviceStatistics> {
   Widget build(BuildContext context) {
     yactive = [];
     ytotal = [];
-    data.forEach((value) {
-      yactive
-          .add(FlSpot(value["xtime"].toDouble(), value["yactive"].toDouble()));
-      ytotal.add(FlSpot(value["xtime"].toDouble(), value["ytotal"].toDouble()));
-    });
+    print(c.trendList.value.data);
+    if (c.trendList.value.data != null) {
+      data.forEach((value) {
+        yactive.add(
+            FlSpot(value["xtime"].toDouble(), value["yactive"].toDouble()));
+        ytotal
+            .add(FlSpot(value["xtime"].toDouble(), value["ytotal"].toDouble()));
+      });
+    }
     return Center(
       child: Stack(
         children: <Widget>[
@@ -76,6 +83,11 @@ class _LineChartAiotState extends State<DeviceStatistics> {
             child: LineChart(
               mainData(),
             ),
+            // child: Obx(
+            //   () => LineChart(
+            //     mainData(),
+            //   ),
+            // ),
           ),
           Positioned(
             top: 20,
