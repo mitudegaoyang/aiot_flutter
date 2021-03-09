@@ -11,10 +11,9 @@ class DashboardController extends GetxController {
 
   final DashboardProvider dashboardProvider;
   final dataStatistics = DataStatistics().obs;
-
-  final deviceTop = DeviceTop().obs;
   final List trendList = [].obs;
   final List trendListYear = [].obs;
+  final List deviceTop = [].obs;
   final count = 0.obs;
 
   @override
@@ -28,10 +27,6 @@ class DashboardController extends GetxController {
     });
     dashboardProvider.getDeviceTrend('1').then((data) {
       trendListYear.assignAll(data.body.data);
-    });
-
-    dashboardProvider.getDeviceTop({}).then((data) {
-      deviceTop.value = data.body;
     });
 
     dashboardProvider.getDeviceTop().then((data) {
