@@ -35,12 +35,31 @@ class DashboardProvider extends GetConnect {
     );
   }
 
-  Future<Response<DeviceTop>> getDeviceTop(data) async {
+  // Future<Response<List<DeviceTop>>> getDeviceTop() async {
+  //   String ip = _box.read('IP');
+  //   return await get(
+  //     'http://$ip/api/v1/dashboard/device/top',
+  //     headers: {"Authorization": _box.read(_key)},
+  //     // decoder: (list) => DeviceTopList.fromJson(list),
+  //     decoder: (list)=>((list as List).forEach((v) {
+  //       List<DeviceTop>.add(new DeviceTop.fromJson(v));
+  //     }),
+  //   );
+  // }
+  Future<Response<List<DeviceTop>>> getDeviceTop() async {
     String ip = _box.read('IP');
     return await get(
       'http://$ip/api/v1/dashboard/device/top',
       headers: {"Authorization": _box.read(_key)},
-      decoder: (list) => DeviceTop.fromJson(list),
+      decoder: (json) {
+        if (json != null) {
+          List<DeviceTop> tmpList = new List();
+          (json as List).forEach((v) {
+            tmpList.add(new DeviceTop.fromJson(v));
+          });
+          return tmpList;
+        }
+      },
     );
   }
 }

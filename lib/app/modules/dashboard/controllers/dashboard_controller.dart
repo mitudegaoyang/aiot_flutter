@@ -33,6 +33,10 @@ class DashboardController extends GetxController {
     dashboardProvider.getDeviceTop({}).then((data) {
       deviceTop.value = data.body;
     });
+
+    dashboardProvider.getDeviceTop().then((data) {
+      deviceTop.assignAll(data.body);
+    });
   }
 
   @override

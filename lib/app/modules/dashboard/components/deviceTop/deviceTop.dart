@@ -6,15 +6,19 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
+// ignore: must_be_immutable
 class DeviceTop extends StatelessWidget {
-  // const DeviceTop({
-  //   Key key,
-  // }) : super(key: key);
-
   final DashboardController c = Get.find();
+  List deviceName = [];
+  List<BarChartGroupData> deviceNum = [];
 
   @override
   Widget build(BuildContext context) {
+    c.deviceTop.forEach((v) {
+      print(v);
+      // print(v['deviceName']);
+      deviceName.add(v.deviceName);
+    });
     return Center(
       child: Stack(
         children: <Widget>[
@@ -22,151 +26,76 @@ class DeviceTop extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.only(
                 right: 12.0, left: 12.0, top: 50, bottom: 12),
-            child: BarChart(
-              BarChartData(
-                alignment: BarChartAlignment.spaceAround,
-                maxY: 20,
-                barTouchData: BarTouchData(
-                  enabled: false,
-                  touchTooltipData: BarTouchTooltipData(
-                    tooltipBgColor: Colors.transparent,
-                    tooltipPadding: const EdgeInsets.all(0),
-                    tooltipBottomMargin: 8,
-                    getTooltipItem: (
-                      BarChartGroupData group,
-                      int groupIndex,
-                      BarChartRodData rod,
-                      int rodIndex,
-                    ) {
-                      return BarTooltipItem(
-                        rod.y.round().toString(),
-                        TextStyle(
-                          color: Color(0xff68737d),
-                          fontWeight: FontWeight.bold,
+            child: Obx(
+              () => c.deviceTop.length < 0
+                  ? Text('暂无数据')
+                  : BarChart(
+                      BarChartData(
+                        alignment: BarChartAlignment.spaceAround,
+                        maxY: 20,
+                        barTouchData: BarTouchData(
+                          enabled: false,
+                          touchTooltipData: BarTouchTooltipData(
+                            tooltipBgColor: Colors.transparent,
+                            tooltipPadding: const EdgeInsets.all(0),
+                            tooltipBottomMargin: 8,
+                            getTooltipItem: (
+                              BarChartGroupData group,
+                              int groupIndex,
+                              BarChartRodData rod,
+                              int rodIndex,
+                            ) {
+                              return BarTooltipItem(
+                                rod.y.round().toString(),
+                                TextStyle(
+                                  color: Color(0xff68737d),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              );
+                            },
+                          ),
                         ),
-                      );
-                    },
-                  ),
-                ),
-                titlesData: FlTitlesData(
-                  // 定义x，y轴的标题
-                  show: true,
-                  bottomTitles: SideTitles(
-                    // x轴标题
-                    showTitles: true,
-                    getTextStyles: (value) => const TextStyle(
-                      color: Color(0xff68737d),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
+                        titlesData: FlTitlesData(
+                          // 定义x，y轴的标题
+                          show: true,
+                          bottomTitles: SideTitles(
+                            // x轴标题
+                            showTitles: true,
+                            getTextStyles: (value) => const TextStyle(
+                              color: Color(0xff68737d),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                            margin: 20,
+                            getTitles: (value) {
+                              // print(value.toInt());
+                              return c.deviceTop[value.toInt()].deviceName;
+                            },
+                          ),
+                          leftTitles: SideTitles(
+                            // 不显示y轴标题
+                            showTitles: false,
+                          ),
+                        ),
+                        borderData: FlBorderData(
+                          show: false,
+                        ),
+                        barGroups: c.deviceTop.map((item) {
+                          return BarChartGroupData(
+                            x: 0,
+                            barRods: [
+                              BarChartRodData(
+                                  y: item.deviceNum.toDouble(),
+                                  colors: [
+                                    Colors.lightBlueAccent,
+                                    Colors.greenAccent
+                                  ])
+                            ],
+                            showingTooltipIndicators: [0],
+                          );
+                        }).toList(),
+                      ),
                     ),
-                    margin: 20,
-                    getTitles: (double value) {
-                      // Obx(() => c.deviceTop.value == null
-                      //     ? ''
-                      //     : c.deviceTop.value.map());
-                      switch (value.toInt()) {
-                        case 0:
-                          return 'Mn';
-                        case 1:
-                          return 'Te';
-                        case 2:
-                          return 'Wd';
-                        case 3:
-                          return 'Tu';
-                        case 4:
-                          return 'Fr';
-                        case 5:
-                          return 'St';
-                        case 6:
-                          return 'Sn';
-                        default:
-                          return '';
-                      }
-                    },
-                  ),
-                  leftTitles: SideTitles(
-                    // 不显示y轴标题
-                    showTitles: false,
-                    // getTextStyles: (value) => const TextStyle(
-                    //   color: Color(0xff67727d),
-                    //   fontWeight: FontWeight.bold,
-                    //   fontSize: 14,
-                    // ),
-                    // margin: 16,
-                    // reservedSize: 14,
-                    // getTitles: (value) {
-                    //   if (value == 0) {
-                    //     return '1K';
-                    //   } else if (value == 10) {
-                    //     return '5K';
-                    //   } else if (value == 19) {
-                    //     return '10K';
-                    //   } else {
-                    //     return '';
-                    //   }
-                    // },
-                  ),
-                ),
-                borderData: FlBorderData(
-                  show: false,
-                ),
-                barGroups: [
-                  BarChartGroupData(
-                    x: 0,
-                    barRods: [
-                      BarChartRodData(
-                          y: 8,
-                          colors: [Colors.lightBlueAccent, Colors.greenAccent])
-                    ],
-                    showingTooltipIndicators: [0],
-                  ),
-                  BarChartGroupData(
-                    x: 1,
-                    barRods: [
-                      BarChartRodData(
-                          y: 10,
-                          colors: [Colors.lightBlueAccent, Colors.greenAccent])
-                    ],
-                    showingTooltipIndicators: [0],
-                  ),
-                  BarChartGroupData(
-                    x: 2,
-                    barRods: [
-                      BarChartRodData(
-                          y: 14,
-                          colors: [Colors.lightBlueAccent, Colors.greenAccent])
-                    ],
-                    showingTooltipIndicators: [0],
-                  ),
-                  BarChartGroupData(
-                    x: 3,
-                    barRods: [
-                      BarChartRodData(
-                          y: 15,
-                          colors: [Colors.lightBlueAccent, Colors.greenAccent])
-                    ],
-                    showingTooltipIndicators: [0],
-                  ),
-                  BarChartGroupData(
-                    x: 3,
-                    barRods: [
-                      BarChartRodData(
-                          y: 13,
-                          colors: [Colors.lightBlueAccent, Colors.greenAccent])
-                    ],
-                    showingTooltipIndicators: [0],
-                  ),
-                  BarChartGroupData(
-                    x: 3,
-                    barRods: [
-                      BarChartRodData(
-                          y: 10,
-                          colors: [Colors.lightBlueAccent, Colors.greenAccent])
-                    ],
-                    showingTooltipIndicators: [0],
-                  ),
-                ],
-              ),
             ),
           ),
           Positioned(
