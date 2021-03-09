@@ -153,6 +153,9 @@ class TenantView extends GetView<TenantController> {
         child: Column(
           children: [
             SearchBar(onSearch: c.onSearch, onCancel: c.onCancelSearch),
+            Container(
+              padding: EdgeInsets.only(top: 10),
+            ),
             Expanded(
               child: RefreshIndicator(
                 onRefresh: c.onRefresh,
