@@ -27,6 +27,8 @@ class TrendList {
 
   TrendList.fromJson(List json) {
     if (json != null) {
+      json.sort((left, right) =>
+          left['xtime'].toDouble().compareTo(right['xtime'].toDouble()));
       data = new List<Trend>();
       (json as List).forEach((v) {
         data.add(new Trend.fromJson(v));

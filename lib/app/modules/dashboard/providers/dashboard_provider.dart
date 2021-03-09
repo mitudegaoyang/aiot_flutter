@@ -29,7 +29,7 @@ class DashboardProvider extends GetConnect {
   Future<Response<TrendList>> getDeviceTrend(String type) async {
     String ip = _box.read('IP');
     return await get(
-      'http://$ip/api/v1/dashboard/device/trend?type=0',
+      'http://$ip/api/v1/dashboard/device/trend?type=$type',
       headers: {"Authorization": _box.read(_key)},
       decoder: (list) => TrendList.fromJson(list),
     );

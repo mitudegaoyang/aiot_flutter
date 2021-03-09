@@ -58,6 +58,7 @@ class _LineChartAiotState extends State<DeviceStatistics> {
   // ];
   List<FlSpot> yactive = [];
   List<FlSpot> ytotal = [];
+  bool isMonth = true;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +75,9 @@ class _LineChartAiotState extends State<DeviceStatistics> {
             child: Obx(
               () => c.trendList.length > 0
                   ? LineChart(
-                      mainData(c.trendList),
+                      isMonth
+                          ? mainData(c.trendList)
+                          : yearData(c.trendListYear),
                     )
                   : Text('暂无数据'),
             ),
@@ -90,13 +93,37 @@ class _LineChartAiotState extends State<DeviceStatistics> {
                 decoration: TextDecoration.none,
               ),
             ),
-          )
+          ),
+          Positioned(
+            top: 15,
+            right: 34,
+            child: SizedBox(
+              width: 80,
+              height: 34,
+              child: FlatButton(
+                onPressed: () {
+                  setState(() {
+                    isMonth = !isMonth;
+                  });
+                },
+                child: Text(
+                  isMonth ? '近一月' : '近一年',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey[500],
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 
   LineChartData mainData(c) {
+    yactive = [];
+    ytotal = [];
     for (Trend t in c) {
       yactive.add(FlSpot(t.xtime.toDouble(), t.yactive.toDouble()));
       ytotal.add(FlSpot(t.xtime.toDouble(), t.ytotal.toDouble()));
@@ -158,6 +185,77 @@ class _LineChartAiotState extends State<DeviceStatistics> {
           },
           reservedSize: 28,
           margin: 12,
+        ),
+      ),
+      borderData: FlBorderData(
+          show: false, // 是否显示边框
+          border: Border.all(color: const Color(0xff37434d), width: 1)),
+      // minX: 1,
+      // maxX: 12,
+      minY: 0,
+      // maxY: 6,
+      lineTouchData: LineTouchData(
+        touchTooltipData: LineTouchTooltipData(
+            tooltipBgColor: Color(0x00555DEC),
+            getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
+              return touchedBarSpots.map((barSpot) {
+                return LineTooltipItem(
+                  '${barSpot.barIndex == 0 ? '总数' : '激活'} ${barSpot.y.toInt()}',
+                  const TextStyle(color: Colors.grey),
+                );
+              }).toList();
+            }),
+      ),
+      lineBarsData: linesBarData(),
+    );
+  }
+
+  LineChartData yearData(c) {
+    yactive = [];
+    ytotal = [];
+    for (Trend t in c) {
+      yactive.add(FlSpot(t.xtime.toDouble(), t.yactive.toDouble()));
+      ytotal.add(FlSpot(t.xtime.toDouble(), t.ytotal.toDouble()));
+    }
+    return LineChartData(
+      gridData: FlGridData(
+        show: false, // 网格线
+        drawVerticalLine: false, // 垂直网格线
+        // getDrawingHorizontalLine: (value) {
+        //   return FlLine(
+        //     color: const Color(0xff37434d),
+        //     strokeWidth: 1,
+        //   );
+        // },
+        // getDrawingVerticalLine: (value) {
+        //   return FlLine(
+        //     color: const Color(0xff37434d),
+        //     strokeWidth: 1,
+        //   );
+        // },
+      ),
+      titlesData: FlTitlesData(
+        show: true,
+        bottomTitles: SideTitles(
+          showTitles: true, // 是否显示x轴图例
+          reservedSize: 22,
+          interval: 2419200000,
+          getTextStyles: (value) => const TextStyle(
+              color: Color(0xff68737d),
+              fontWeight: FontWeight.bold,
+              fontSize: 16),
+          getTitles: (value) {
+            final d = Day.fromUnix(value.toInt());
+            final now = Day().add(2, 'M');
+            if (now.diff(d, 'M') % 3 == 0) {
+              return d.format('M') + '月';
+            }
+            return '';
+          },
+          margin: 8,
+        ),
+        leftTitles: SideTitles(
+          showTitles: false, // 是否显示y轴图例
         ),
       ),
       borderData: FlBorderData(

@@ -101,6 +101,9 @@ class DashboardView extends GetView<DashboardController> {
                   child: TelemetryTrend(),
                 ),
               ),
+              SizedBox(
+                height: 24.0,
+              ),
             ],
           ),
         ),
