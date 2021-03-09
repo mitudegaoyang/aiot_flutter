@@ -13,11 +13,14 @@ class AuthProvider extends GetConnect {
   @override
   void onInit() {
     httpClient.defaultDecoder = (map) => Auth.fromJson(map);
-    httpClient.baseUrl = CloudConfig.baseUrl;
   }
 
-  Future<Response<Auth>> login(data) async => await post('/login', data);
-  Future<Response<User>> touch() async => await get('/me/info',
-      headers: {"Authorization": _box.read(_key)},
-      decoder: (map) => User.fromJson(map));
+  Future<Response<Auth>> login(data, ip) async {
+    return await post('http://$ip/api/v1/login', data);
+  }
+
+  Future<Response<User>> touch(ip) async =>
+      await get('http://$ip/api/v1/me/info',
+          headers: {"Authorization": _box.read(_key)},
+          decoder: (map) => User.fromJson(map));
 }

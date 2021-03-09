@@ -131,3 +131,17 @@ const kCaptionRoman = TextStyle(
     height: 1);
 // padding
 const double kDefaultPadding = 30.0;
+// Decoration
+InputDecoration kInputDecoration(String hintText) => InputDecoration(
+      hintText: hintText,
+      filled: true,
+      fillColor: Color(0xFFF5F6FA),
+      contentPadding: EdgeInsets.only(left: 20, right: 20),
+      focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.all(Radius.circular(100))),
+      enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.all(Radius.circular(100))),
+      hintStyle: TextStyle(color: Color(0xffC1C0C8)),
+    );

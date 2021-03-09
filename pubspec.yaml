@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  vibration: ^1.7.3
   flutter_svg: 0.19.3
   modal_bottom_sheet: 1.0.0+1
   # sqflite: 2.0.0+1

@@ -1,3 +1,5 @@
+import 'package:aiot/app/modules/home/controllers/auth_controller.dart';
+import 'package:aiot/app/modules/home/providers/auth_provider.dart';
 import 'package:aiot/app/modules/server/repositories/server.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +15,11 @@ class ServerBinding extends Bindings {
     );
     Get.lazyPut<ServerController>(
       () => ServerController(Get.find()),
+    );
+    Get.lazyPut<AuthProvider>(() => AuthProvider());
+
+    Get.lazyPut<AuthController>(
+      () => AuthController(authProvider: Get.find()),
     );
   }
 }
