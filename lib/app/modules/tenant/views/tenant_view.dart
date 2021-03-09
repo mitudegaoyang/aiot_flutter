@@ -10,7 +10,7 @@ class TenantView extends GetView<TenantController> {
   Widget _buildRow(Tenant item) {
     final TenantController c = Get.find();
     return Container(
-      margin: EdgeInsets.only(bottom: getProportionateScreenHeight(16)),
+      margin: EdgeInsets.only(top: getProportionateScreenHeight(16)),
       child: Row(
         children: [
           Container(
