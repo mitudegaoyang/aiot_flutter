@@ -151,6 +151,11 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_web_plugins:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   get:
     dependency: "direct main"
     description:
@@ -172,6 +177,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.19"
+  js:
+    dependency: transitive
+    description:
+      name: js
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.6.3"
   matcher:
     dependency: transitive
     description:
@@ -366,6 +378,20 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.0"
+  vibration:
+    dependency: "direct main"
+    description:
+      name: vibration
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.7.3"
+  vibration_web:
+    dependency: transitive
+    description:
+      name: vibration_web
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.6.2"
   win32:
     dependency: transitive
     description:
