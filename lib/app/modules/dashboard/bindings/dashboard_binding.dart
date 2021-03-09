@@ -1,3 +1,4 @@
+import 'package:aiot/app/modules/dashboard/controllers/ratio_controller.dart';
 import 'package:aiot/app/modules/dashboard/providers/dashboard_provider.dart';
 import 'package:get/get.dart';
 
@@ -9,6 +10,10 @@ class DashboardBinding extends Bindings {
     Get.lazyPut<DashboardProvider>(() => DashboardProvider());
     Get.lazyPut<DashboardController>(
       () => DashboardController(dashboardProvider: Get.find()),
+    );
+
+    Get.lazyPut<RatioController>(
+      () => RatioController(ratioProvider: Get.find()),
     );
   }
 }

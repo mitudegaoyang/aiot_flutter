@@ -51,4 +51,13 @@ class DashboardProvider extends GetConnect {
       },
     );
   }
+
+  Future<Response<DataStatisticsRatio>> getRatio() async {
+    String ip = _box.read('IP');
+    return await get(
+      'http://$ip/api/v1/dashboard/device/ratio',
+      headers: {"Authorization": _box.read(_key)},
+      decoder: (map) => DataStatisticsRatio.fromJson(map),
+    );
+  }
 }

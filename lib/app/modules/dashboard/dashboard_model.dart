@@ -75,3 +75,31 @@ class DeviceTop {
     return data;
   }
 }
+
+class DataStatisticsRatio {
+  int total;
+  List<Map<String, dynamic>> type;
+
+  DataStatisticsRatio({
+    total,
+  });
+
+  DataStatisticsRatio.fromJson(Map<String, dynamic> json) {
+    total = json['total'];
+    if (json['type'] != null) {
+      type = [];
+      json['type'].forEach((v) {
+        type.add(v);
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['total'] = total;
+    if (type != null) {
+      data['type'] = type.map((v) => v).toList();
+    }
+    return data;
+  }
+}
