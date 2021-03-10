@@ -14,11 +14,6 @@ class DeviceTop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    c.deviceTop.forEach((v) {
-      print(v);
-      // print(v['deviceName']);
-      deviceName.add(v.deviceName);
-    });
     return Center(
       child: Stack(
         children: <Widget>[
@@ -68,7 +63,6 @@ class DeviceTop extends StatelessWidget {
                             ),
                             margin: 20,
                             getTitles: (value) {
-                              // print(value.toInt());
                               return c.deviceTop[value.toInt()].deviceName;
                             },
                           ),
@@ -80,12 +74,12 @@ class DeviceTop extends StatelessWidget {
                         borderData: FlBorderData(
                           show: false,
                         ),
-                        barGroups: c.deviceTop.map((item) {
+                        barGroups: c.deviceTop.asMap().keys.map((index) {
                           return BarChartGroupData(
-                            x: 0,
+                            x: index,
                             barRods: [
                               BarChartRodData(
-                                  y: item.deviceNum.toDouble(),
+                                  y: c.deviceTop[index].deviceNum.toDouble(),
                                   colors: [
                                     Colors.lightBlueAccent,
                                     Colors.greenAccent
