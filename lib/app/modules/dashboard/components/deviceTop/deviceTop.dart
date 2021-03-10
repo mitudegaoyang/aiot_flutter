@@ -20,14 +20,14 @@ class DeviceTop extends StatelessWidget {
           Container(
             width: double.infinity,
             padding: const EdgeInsets.only(
-                right: 12.0, left: 12.0, top: 50, bottom: 12),
+                right: 12.0, left: 12.0, top: 78, bottom: 12),
             child: Obx(
               () => c.deviceTop.length < 0
                   ? Text('暂无数据')
                   : BarChart(
                       BarChartData(
                         alignment: BarChartAlignment.spaceAround,
-                        maxY: 20,
+                        minY: 0,
                         barTouchData: BarTouchData(
                           enabled: false,
                           touchTooltipData: BarTouchTooltipData(
