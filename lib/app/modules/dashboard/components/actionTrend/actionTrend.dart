@@ -56,7 +56,7 @@ class _LineChartAiotState extends State<ActionTrend> {
             right: 34,
             child: Obx(
               () => Text(
-                c.telemetryTotal.toString(),
+                c.actionTotal.toString(),
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
