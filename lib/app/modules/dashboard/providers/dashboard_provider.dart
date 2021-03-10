@@ -33,16 +33,23 @@ class DashboardProvider extends GetConnect {
       // decoder: (list) => TrendList.fromJson(list),
       decoder: (json) {
         if (json != null) {
-          json.sort(
-            (left, right) {
-              return left['xtime']
-                          .toDouble()
-                          .compareTo(right['xtime'].toDouble()) ==
-                      1
+          // 不使用箭头函数用法
+          // json.sort(
+          //   (left, right) {
+          //     return left['xtime']
+          //                 .toDouble()
+          //                 .compareTo(right['xtime'].toDouble()) ==
+          //             1
+          //         ? 1
+          //         : -1;
+          //   },
+          // );
+
+          // 使用箭头函数用法
+          json.sort((left, right) =>
+              left['xtime'].toDouble().compareTo(right['xtime'].toDouble()) == 1
                   ? 1
-                  : -1;
-            },
-          );
+                  : -1);
           List<Trend> tmpList = new List();
           (json as List).forEach((v) {
             tmpList.add(new Trend.fromJson(v));
