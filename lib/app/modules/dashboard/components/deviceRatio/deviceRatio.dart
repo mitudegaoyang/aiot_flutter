@@ -32,40 +32,93 @@ class DeviceRatioState extends State {
                     const SizedBox(
                       height: 18,
                     ),
-                    Expanded(
-                      child: AspectRatio(
-                        aspectRatio: 1,
-                        child: PieChart(
-                          PieChartData(
-                              pieTouchData: PieTouchData(
-                                  touchCallback: (pieTouchResponse) {
-                                setState(() {
-                                  if (pieTouchResponse.touchInput
-                                          is FlLongPressEnd ||
-                                      pieTouchResponse.touchInput is FlPanEnd) {
-                                    touchedIndex = -1;
-                                  } else {
-                                    touchedIndex =
-                                        pieTouchResponse.touchedSectionIndex;
-                                  }
-                                });
-                              }),
-                              borderData: FlBorderData(
-                                show: false,
+                    SizedBox(
+                      width: 200,
+                      child: Stack(
+                        children: [
+                          AspectRatio(
+                            aspectRatio: 1,
+                            child: PieChart(
+                              PieChartData(
+                                  pieTouchData: PieTouchData(
+                                      touchCallback: (pieTouchResponse) {
+                                    setState(() {
+                                      if (pieTouchResponse.touchInput
+                                              is FlLongPressEnd ||
+                                          pieTouchResponse.touchInput
+                                              is FlPanEnd) {
+                                        touchedIndex = -1;
+                                      } else {
+                                        touchedIndex = pieTouchResponse
+                                            .touchedSectionIndex;
+                                      }
+                                    });
+                                  }),
+                                  borderData: FlBorderData(
+                                    show: false,
+                                  ),
+                                  sectionsSpace: 1,
+                                  centerSpaceRadius: 40,
+                                  startDegreeOffset: -90,
+                                  sections: showingSections(
+                                      c.dataStatisticsRatio.value.type)),
+                            ),
+                          ),
+                          Positioned(
+                            top: 80.0,
+                            left: 80.0,
+                            child: SizedBox(
+                              width: 40,
+                              height: 40,
+                              child: Center(
+                                child: Text(
+                                  c.dataStatisticsRatio.value.total.toString(),
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                    decoration: TextDecoration.none,
+                                  ),
+                                ),
                               ),
-                              sectionsSpace: 1,
-                              centerSpaceRadius: 40,
-                              startDegreeOffset: -90,
-                              sections: showingSections(
-                                  c.dataStatisticsRatio.value.type)),
-                        ),
+                            ),
+                          ),
+                        ],
                       ),
+                      // child: AspectRatio(
+                      //   aspectRatio: 1,
+                      //   child: PieChart(
+                      //     PieChartData(
+                      //         pieTouchData: PieTouchData(
+                      //             touchCallback: (pieTouchResponse) {
+                      //           setState(() {
+                      //             if (pieTouchResponse.touchInput
+                      //                     is FlLongPressEnd ||
+                      //                 pieTouchResponse.touchInput is FlPanEnd) {
+                      //               touchedIndex = -1;
+                      //             } else {
+                      //               touchedIndex =
+                      //                   pieTouchResponse.touchedSectionIndex;
+                      //             }
+                      //           });
+                      //         }),
+                      //         borderData: FlBorderData(
+                      //           show: false,
+                      //         ),
+                      //         sectionsSpace: 1,
+                      //         centerSpaceRadius: 40,
+                      //         startDegreeOffset: -90,
+                      //         sections: showingSections(
+                      //             c.dataStatisticsRatio.value.type)),
+                      //   ),
+                      // ),
                     ),
-                    Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: showTitle(c.dataStatisticsRatio.value.type),
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: showTitle(c.dataStatisticsRatio.value.type),
+                      ),
                     ),
                     const SizedBox(
                       width: 28,
