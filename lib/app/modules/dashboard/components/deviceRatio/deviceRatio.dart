@@ -2,7 +2,6 @@
 
 // import 'package:get/get.dart';
 import 'package:aiot/app/modules/dashboard/controllers/ratio_controller.dart';
-import 'package:aiot/app/modules/dashboard/dashboard_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:get/get.dart';
@@ -149,7 +148,7 @@ class DeviceRatioState extends State {
     2: Color(0xff13d38e)
   };
 
-  List showTitle(c) {
+  List<Widget> showTitle(c) {
     List<Map<String, dynamic>> data = [];
     data = c;
     if (data?.isNotEmpty ?? false) {
@@ -171,6 +170,8 @@ class DeviceRatioState extends State {
           ),
         );
       }));
+    } else {
+      return [];
     }
   }
 
