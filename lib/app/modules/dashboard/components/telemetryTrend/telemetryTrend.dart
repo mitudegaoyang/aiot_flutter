@@ -75,7 +75,6 @@ class _LineChartAiotState extends State<TelemetryTrend> {
 
   LineChartData mainData(c) {
     yData = [];
-    print(gradientColors[0] == Color(0xff23b6e6));
     for (Telemetry t in c) {
       yData.add(FlSpot(t.x.toDouble(), t.y.toDouble()));
     }

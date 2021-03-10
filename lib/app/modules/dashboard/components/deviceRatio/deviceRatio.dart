@@ -18,7 +18,6 @@ class DeviceRatioState extends State {
   final RatioController c = Get.find();
   int touchedIndex;
   List<dynamic> data = [];
-
   @override
   Widget build(BuildContext context) {
     return Obx(() => SizedBox.expand(
@@ -28,19 +27,23 @@ class DeviceRatioState extends State {
                 width: double.infinity,
                 padding: const EdgeInsets.only(
                     right: 12.0, left: 12.0, top: 50, bottom: 12),
-                child: Row(
-                  children: <Widget>[
-                    const SizedBox(
-                      height: 18,
-                    ),
-                    SizedBox(
-                      width: 200,
-                      child: Stack(
-                        children: [
-                          AspectRatio(
-                            aspectRatio: 1,
-                            child: c.dataStatisticsRatio.value.type.length > 0
-                                ? PieChart(
+                child: c.dataStatisticsRatio.value != null &&
+                        // c.dataStatisticsRatio.value.type != null &&
+                        // c.dataStatisticsRatio.value.type.length > 0 &&
+                        c.dataStatisticsRatio.value.total != null &&
+                        c.dataStatisticsRatio.value.total > 0
+                    ? Row(
+                        children: <Widget>[
+                          const SizedBox(
+                            height: 18,
+                          ),
+                          SizedBox(
+                            width: 200,
+                            child: Stack(
+                              children: [
+                                AspectRatio(
+                                  aspectRatio: 1,
+                                  child: PieChart(
                                     PieChartData(
                                         pieTouchData: PieTouchData(
                                             touchCallback: (pieTouchResponse) {
@@ -64,72 +67,47 @@ class DeviceRatioState extends State {
                                         startDegreeOffset: -90,
                                         sections: showingSections(
                                             c.dataStatisticsRatio.value.type)),
-                                  )
-                                : Center(
-                                    child: Text('暂无数据'),
-                                  ),
-                          ),
-                          Positioned(
-                            top: 80.0,
-                            left: 80.0,
-                            child: SizedBox(
-                              width: 40,
-                              height: 40,
-                              child: Center(
-                                child: Text(
-                                  c.dataStatisticsRatio.value.total.toString(),
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black,
-                                    decoration: TextDecoration.none,
                                   ),
                                 ),
-                              ),
+                                Positioned(
+                                  top: 80.0,
+                                  left: 80.0,
+                                  child: SizedBox(
+                                    width: 40,
+                                    height: 40,
+                                    child: Center(
+                                      child: Text(
+                                        c.dataStatisticsRatio.value.total
+                                            .toString(),
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.black,
+                                          decoration: TextDecoration.none,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: Column(
+                              // mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children:
+                                  showTitle(c.dataStatisticsRatio.value.type),
                             ),
                           ),
                         ],
+                      )
+                    : Center(
+                        child: Text('暂无数据'),
                       ),
-                      // child: AspectRatio(
-                      //   aspectRatio: 1,
-                      //   child: PieChart(
-                      //     PieChartData(
-                      //         pieTouchData: PieTouchData(
-                      //             touchCallback: (pieTouchResponse) {
-                      //           setState(() {
-                      //             if (pieTouchResponse.touchInput
-                      //                     is FlLongPressEnd ||
-                      //                 pieTouchResponse.touchInput is FlPanEnd) {
-                      //               touchedIndex = -1;
-                      //             } else {
-                      //               touchedIndex =
-                      //                   pieTouchResponse.touchedSectionIndex;
-                      //             }
-                      //           });
-                      //         }),
-                      //         borderData: FlBorderData(
-                      //           show: false,
-                      //         ),
-                      //         sectionsSpace: 1,
-                      //         centerSpaceRadius: 40,
-                      //         startDegreeOffset: -90,
-                      //         sections: showingSections(
-                      //             c.dataStatisticsRatio.value.type)),
-                      //   ),
-                      // ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                      child: Column(
-                        // mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: showTitle(c.dataStatisticsRatio.value.type),
-                      ),
-                    ),
-                  ],
-                ),
               ),
               Positioned(
                 top: 20.0,
@@ -155,8 +133,7 @@ class DeviceRatioState extends State {
   };
 
   List<Widget> showTitle(c) {
-    List<Map<String, dynamic>> data = [];
-    data = c;
+    List<Map<String, dynamic>> data = c;
     if (data?.isNotEmpty ?? false) {
       return new List<Widget>.from(data.asMap().keys.map((i) {
         return Container(
@@ -183,9 +160,8 @@ class DeviceRatioState extends State {
   }
 
   List<PieChartSectionData> showingSections(c) {
-    List<Map<String, dynamic>> data = [];
+    List<Map<String, dynamic>> data = c;
     double total = 0;
-    data = c;
     if (data?.isNotEmpty ?? false) {
       //计算total
       for (int i = 0; i < data.length; i++) {
@@ -195,10 +171,14 @@ class DeviceRatioState extends State {
         final isTouched = i == touchedIndex;
         final double fontSize = isTouched ? 20 : 14;
         final double radius = isTouched ? 60 : 50;
+        String count = "0";
+        if (data[i]['count'] > 0) {
+          count = "${(data[i]['count'] / total * 100).round()}%";
+        }
         return PieChartSectionData(
           color: ratioColor[i] ?? Color(0xff0293ee),
           value: data[i]['count'].toDouble(),
-          title: "${(data[i]['count'] / total * 100).round()}%",
+          title: count,
           radius: radius,
           titleStyle: TextStyle(
               fontSize: fontSize,
