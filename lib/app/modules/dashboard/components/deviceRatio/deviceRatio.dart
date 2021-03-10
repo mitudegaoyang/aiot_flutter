@@ -111,16 +111,16 @@ class DeviceRatioState extends State {
                       //   ),
                       // ),
                     ),
+                    const SizedBox(
+                      width: 10,
+                    ),
                     Expanded(
                       child: Column(
-                        mainAxisSize: MainAxisSize.max,
+                        // mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: showTitle(c.dataStatisticsRatio.value.type),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 28,
                     ),
                   ],
                 ),
@@ -155,7 +155,8 @@ class DeviceRatioState extends State {
       return new List<Widget>.from(data.asMap().keys.map((i) {
         return Container(
           decoration: BoxDecoration(),
-          child: Column(
+          child: Wrap(
+            direction: Axis.vertical,
             children: [
               Indicator(
                 color: ratioColor[i] ?? Color(0xff0293ee),
