@@ -75,6 +75,7 @@ class _LineChartAiotState extends State<TelemetryTrend> {
 
   LineChartData mainData(c) {
     yData = [];
+    print(gradientColors[0] == Color(0xff23b6e6));
     for (Telemetry t in c) {
       yData.add(FlSpot(t.x.toDouble(), t.y.toDouble()));
     }
@@ -144,6 +145,23 @@ class _LineChartAiotState extends State<TelemetryTrend> {
       // maxX: 11,
       minY: 0,
       // maxY: 6,
+      lineTouchData: LineTouchData(
+        touchTooltipData: LineTouchTooltipData(
+            // tooltipBgColor: Color(0xBB02d39a),
+            getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
+          return touchedBarSpots.map(
+            (barSpot) {
+              return LineTooltipItem(
+                '${barSpot.y.toInt()}',
+                TextStyle(
+                  color: gradientColors[0],
+                  fontWeight: FontWeight.w700,
+                ),
+              );
+            },
+          ).toList();
+        }),
+      ),
       lineBarsData: linesBarData1(),
     );
   }

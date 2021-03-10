@@ -144,6 +144,23 @@ class _LineChartAiotState extends State<ActionTrend> {
       // maxX: 11,
       minY: 0,
       // maxY: 6,
+      lineTouchData: LineTouchData(
+        touchTooltipData: LineTouchTooltipData(
+            // tooltipBgColor: Color(0xBB02d39a),
+            getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
+          return touchedBarSpots.map(
+            (barSpot) {
+              return LineTooltipItem(
+                '${barSpot.y.toInt()}',
+                TextStyle(
+                  color: gradientColors[0],
+                  fontWeight: FontWeight.w700,
+                ),
+              );
+            },
+          ).toList();
+        }),
+      ),
       lineBarsData: linesBarData1(),
     );
   }
