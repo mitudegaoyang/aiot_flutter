@@ -39,31 +39,35 @@ class DeviceRatioState extends State {
                         children: [
                           AspectRatio(
                             aspectRatio: 1,
-                            child: PieChart(
-                              PieChartData(
-                                  pieTouchData: PieTouchData(
-                                      touchCallback: (pieTouchResponse) {
-                                    setState(() {
-                                      if (pieTouchResponse.touchInput
-                                              is FlLongPressEnd ||
-                                          pieTouchResponse.touchInput
-                                              is FlPanEnd) {
-                                        touchedIndex = -1;
-                                      } else {
-                                        touchedIndex = pieTouchResponse
-                                            .touchedSectionIndex;
-                                      }
-                                    });
-                                  }),
-                                  borderData: FlBorderData(
-                                    show: false,
+                            child: c.dataStatisticsRatio.value.type.length > 0
+                                ? PieChart(
+                                    PieChartData(
+                                        pieTouchData: PieTouchData(
+                                            touchCallback: (pieTouchResponse) {
+                                          setState(() {
+                                            if (pieTouchResponse.touchInput
+                                                    is FlLongPressEnd ||
+                                                pieTouchResponse.touchInput
+                                                    is FlPanEnd) {
+                                              touchedIndex = -1;
+                                            } else {
+                                              touchedIndex = pieTouchResponse
+                                                  .touchedSectionIndex;
+                                            }
+                                          });
+                                        }),
+                                        borderData: FlBorderData(
+                                          show: false,
+                                        ),
+                                        sectionsSpace: 1,
+                                        centerSpaceRadius: 40,
+                                        startDegreeOffset: -90,
+                                        sections: showingSections(
+                                            c.dataStatisticsRatio.value.type)),
+                                  )
+                                : Center(
+                                    child: Text('暂无数据'),
                                   ),
-                                  sectionsSpace: 1,
-                                  centerSpaceRadius: 40,
-                                  startDegreeOffset: -90,
-                                  sections: showingSections(
-                                      c.dataStatisticsRatio.value.type)),
-                            ),
                           ),
                           Positioned(
                             top: 80.0,
