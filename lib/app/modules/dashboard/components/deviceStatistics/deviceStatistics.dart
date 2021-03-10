@@ -79,7 +79,9 @@ class _LineChartAiotState extends State<DeviceStatistics> {
                           ? mainData(c.trendList)
                           : yearData(c.trendListYear),
                     )
-                  : Text('暂无数据'),
+                  : Center(
+                      child: Text('暂无数据'),
+                    ),
             ),
           ),
           Positioned(

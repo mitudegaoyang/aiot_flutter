@@ -36,7 +36,9 @@ class _LineChartAiotState extends State<TelemetryTrend> {
             child: Obx(
               () => c.telemetryTrendList.length > 0
                   ? LineChart(mainData(c.telemetryTrendList))
-                  : Text('暂无数据'),
+                  : Center(
+                      child: Text('暂无数据'),
+                    ),
             ),
           ),
           Positioned(

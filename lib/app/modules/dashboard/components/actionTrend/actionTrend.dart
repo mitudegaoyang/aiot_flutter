@@ -36,7 +36,9 @@ class _LineChartAiotState extends State<ActionTrend> {
             child: Obx(
               () => c.actionTrendList.length > 0
                   ? LineChart(mainData(c.actionTrendList))
-                  : Text('暂无数据'),
+                  : Center(
+                      child: Text('暂无数据'),
+                    ),
             ),
           ),
           Positioned(
