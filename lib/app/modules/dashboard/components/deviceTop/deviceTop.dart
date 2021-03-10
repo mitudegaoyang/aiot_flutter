@@ -22,9 +22,8 @@ class DeviceTop extends StatelessWidget {
             padding: const EdgeInsets.only(
                 right: 12.0, left: 12.0, top: 78, bottom: 12),
             child: Obx(
-              () => c.deviceTop.length < 0
-                  ? Text('暂无数据')
-                  : BarChart(
+              () => c.deviceTop.length > 0
+                  ? BarChart(
                       BarChartData(
                         alignment: BarChartAlignment.spaceAround,
                         minY: 0,
@@ -89,7 +88,8 @@ class DeviceTop extends StatelessWidget {
                           );
                         }).toList(),
                       ),
-                    ),
+                    )
+                  : Text('暂无数据'),
             ),
           ),
           Positioned(
