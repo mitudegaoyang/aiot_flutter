@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 // import 'package:get_storage/get_storage.dart';
 
@@ -13,8 +15,11 @@ class DashboardController extends GetxController {
   final dataStatistics = DataStatistics().obs;
   final List trendList = [].obs;
   final List trendListYear = [].obs;
+  final List telemetryTrendList = [].obs;
+  final telemetryTotal = 0.obs;
   final List deviceTop = [].obs;
   final count = 0.obs;
+  Timer timer;
 
   @override
   void onInit() {
@@ -28,10 +33,16 @@ class DashboardController extends GetxController {
     dashboardProvider.getDeviceTrend('1').then((data) {
       trendListYear.assignAll(data.body);
     });
+    dashboardProvider.getTelemetryTrend().then((data) {
+      telemetryTrendList.assignAll(data.body.histories);
+      telemetryTotal.value = data.body.total;
+    });
 
     dashboardProvider.getDeviceTop().then((data) {
       deviceTop.assignAll(data.body);
     });
+
+    timers();
   }
 
   @override
@@ -40,6 +51,19 @@ class DashboardController extends GetxController {
   }
 
   @override
-  void onClose() {}
+  void onClose() {
+    timer.cancel();
+  }
+
   void increment() => count.value++;
+
+  void timers() {
+    timer = Timer(Duration(seconds: 10), () {
+      dashboardProvider.getTelemetryTrend().then((data) {
+        telemetryTrendList.assignAll(data.body.histories);
+        telemetryTotal.value = data.body.total;
+      });
+      timers();
+    });
+  }
 }

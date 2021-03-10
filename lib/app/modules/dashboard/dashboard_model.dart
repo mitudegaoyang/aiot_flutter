@@ -125,3 +125,48 @@ class Trend {
     return data;
   }
 }
+
+class TelemetryTrend {
+  int total;
+  List<dynamic> histories;
+
+  TelemetryTrend({total, histories});
+
+  TelemetryTrend.fromJson(Map<String, dynamic> json) {
+    total = json['total'];
+    if (json['histories'] != null) {
+      histories = <Telemetry>[];
+      json['histories'].forEach((v) {
+        histories.add(Telemetry.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['total'] = total;
+    if (histories != null) {
+      data['histories'] = histories.map((v) => v).toList();
+    }
+    return data;
+  }
+}
+
+class Telemetry {
+  int x;
+  int y;
+
+  Telemetry({x, y});
+
+  Telemetry.fromJson(Map<String, dynamic> json) {
+    x = json['x'];
+    y = json['y'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['x'] = x;
+    data['y'] = y;
+    return data;
+  }
+}

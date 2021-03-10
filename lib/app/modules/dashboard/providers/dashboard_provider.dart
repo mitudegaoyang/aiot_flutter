@@ -85,4 +85,13 @@ class DashboardProvider extends GetConnect {
       decoder: (map) => DataStatisticsRatio.fromJson(map),
     );
   }
+
+  Future<Response<TelemetryTrend>> getTelemetryTrend() async {
+    String ip = _box.read('IP');
+    return await get(
+      'http://$ip/api/v1/screen/telemetry/trend',
+      headers: {"Authorization": _box.read(_key)},
+      decoder: (map) => TelemetryTrend.fromJson(map),
+    );
+  }
 }
