@@ -272,12 +272,15 @@ class _LineChartAiotState extends State<DeviceStatistics> {
       // maxY: 6,
       lineTouchData: LineTouchData(
         touchTooltipData: LineTouchTooltipData(
-            tooltipBgColor: Color(0x00555DEC),
+            tooltipBgColor: Color(0xBB02d39a),
             getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
               return touchedBarSpots.map((barSpot) {
                 return LineTooltipItem(
-                  '${barSpot.barIndex == 0 ? '总数' : '激活'} ${barSpot.y.toInt()}',
-                  const TextStyle(color: Colors.grey),
+                  '${Day.fromUnix(barSpot.x.toInt()).format('M')}月 ${barSpot.barIndex == 0 ? '总数' : '激活'} ${barSpot.y.toInt()}',
+                  const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                  ),
                 );
               }).toList();
             }),
