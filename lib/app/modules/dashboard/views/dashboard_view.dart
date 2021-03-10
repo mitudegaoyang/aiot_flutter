@@ -8,6 +8,7 @@ import 'package:aiot/app/modules/dashboard/components/deviceStatistics/deviceSta
 import 'package:aiot/app/modules/dashboard/components/deviceTop/deviceTop.dart';
 import 'package:aiot/app/modules/dashboard/components/deviceRatio/deviceRatio.dart';
 import 'package:aiot/app/modules/dashboard/components/telemetryTrend/telemetryTrend.dart';
+import 'package:aiot/app/modules/dashboard/components/actionTrend/actionTrend.dart';
 
 class DashboardView extends GetView<DashboardController> {
   @override
@@ -99,6 +100,22 @@ class DashboardView extends GetView<DashboardController> {
                   width: double.infinity,
                   height: 200.0,
                   child: TelemetryTrend(),
+                ),
+              ),
+              SizedBox(
+                height: 24.0,
+              ),
+              Card(
+                margin: EdgeInsets.symmetric(vertical: 0, horizontal: 20.0),
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                elevation: 8,
+                shadowColor: Color(0xffffffff),
+                child: Container(
+                  width: double.infinity,
+                  height: 200.0,
+                  child: ActionTrend(),
                 ),
               ),
               SizedBox(

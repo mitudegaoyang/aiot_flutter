@@ -17,6 +17,8 @@ class DashboardController extends GetxController {
   final List trendListYear = [].obs;
   final List telemetryTrendList = [].obs;
   final telemetryTotal = 0.obs;
+  final List actionTrendList = [].obs;
+  final actionTotal = 0.obs;
   final List deviceTop = [].obs;
   final count = 0.obs;
   Timer timer;
@@ -36,6 +38,10 @@ class DashboardController extends GetxController {
     dashboardProvider.getTelemetryTrend().then((data) {
       telemetryTrendList.assignAll(data.body.histories);
       telemetryTotal.value = data.body.total;
+    });
+    dashboardProvider.getActionTrend().then((data) {
+      actionTrendList.assignAll(data.body.histories);
+      actionTotal.value = data.body.total;
     });
 
     dashboardProvider.getDeviceTop().then((data) {
@@ -62,6 +68,10 @@ class DashboardController extends GetxController {
       dashboardProvider.getTelemetryTrend().then((data) {
         telemetryTrendList.assignAll(data.body.histories);
         telemetryTotal.value = data.body.total;
+      });
+      dashboardProvider.getActionTrend().then((data) {
+        actionTrendList.assignAll(data.body.histories);
+        actionTotal.value = data.body.total;
       });
       timers();
     });
