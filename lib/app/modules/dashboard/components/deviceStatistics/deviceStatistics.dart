@@ -196,14 +196,19 @@ class _LineChartAiotState extends State<DeviceStatistics> {
       // maxY: 6,
       lineTouchData: LineTouchData(
         touchTooltipData: LineTouchTooltipData(
-            tooltipBgColor: Color(0x00555DEC),
+            tooltipBgColor: Color(0xBB02d39a),
             getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
-              return touchedBarSpots.map((barSpot) {
-                return LineTooltipItem(
-                  '${barSpot.barIndex == 0 ? '总数' : '激活'} ${barSpot.y.toInt()}',
-                  const TextStyle(color: Colors.grey),
-                );
-              }).toList();
+              return touchedBarSpots.map(
+                (barSpot) {
+                  return LineTooltipItem(
+                    '${Day.fromUnix(barSpot.x.toInt()).format('MM/DD')} ${barSpot.barIndex == 0 ? '总数' : '激活'} ${barSpot.y.toInt()}',
+                    const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  );
+                },
+              ).toList();
             }),
       ),
       lineBarsData: linesBarData(),

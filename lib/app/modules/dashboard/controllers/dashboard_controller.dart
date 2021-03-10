@@ -47,13 +47,12 @@ class DashboardController extends GetxController {
     dashboardProvider.getDeviceTop().then((data) {
       deviceTop.assignAll(data.body);
     });
-
-    timers();
   }
 
   @override
   void onReady() {
     super.onReady();
+    timers();
   }
 
   @override
