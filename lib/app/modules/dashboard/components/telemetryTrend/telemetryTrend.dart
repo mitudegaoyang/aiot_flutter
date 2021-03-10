@@ -105,8 +105,8 @@ class _LineChartAiotState extends State<TelemetryTrend> {
               fontSize: 16),
           getTitles: (value) {
             final d = Day.fromUnix(value.toInt());
-            final now = Day();
-            if (now.diff(d, 's') % 20 == 0) {
+            final now = Day().add(10, 's');
+            if (now.diff(d, 's') % 30 == 0) {
               return d.format('mm:ss');
             }
             return '';
