@@ -29,8 +29,6 @@ class _LineChartAiotState extends State<LineChartTrend> {
 
   @override
   Widget build(BuildContext context) {
-    print(data);
-
     return LineChart(mainData(this.data));
   }
 
