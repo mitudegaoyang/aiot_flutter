@@ -110,7 +110,7 @@ class _LineChartAiotState extends State<LineChartTrend> {
           return touchedBarSpots.map(
             (barSpot) {
               return LineTooltipItem(
-                '${barSpot.y.toInt()}',
+                '${Day.fromUnix(barSpot.x.toInt()).format('mm:ss')}  ${barSpot.y.toInt()}',
                 TextStyle(
                   color: gradientColors[0],
                   fontWeight: FontWeight.w700,
