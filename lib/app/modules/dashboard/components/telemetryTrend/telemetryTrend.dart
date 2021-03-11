@@ -20,6 +20,7 @@ class _LineChartAiotState extends State<TelemetryTrend> {
     final DashboardController c = Get.find();
     return Center(
       child: Stack(
+        clipBehavior: Clip.hardEdge,
         children: <Widget>[
           Container(
             width: double.infinity,
@@ -59,7 +60,11 @@ class _LineChartAiotState extends State<TelemetryTrend> {
                 ),
               ),
             ),
-          )
+          ),
+          Positioned(
+            left: -1,
+            child: SizedBox(),
+          ),
         ],
       ),
     );

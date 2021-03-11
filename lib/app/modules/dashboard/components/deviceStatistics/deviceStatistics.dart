@@ -26,36 +26,6 @@ class _LineChartAiotState extends State<DeviceStatistics> {
     const Color(0xff02d39a),
   ];
 
-  // List data = [
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1612800000000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1612886400000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1612972800000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1613059200000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1613145600000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1613232000000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1613318400000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1613404800000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1613491200000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1613577600000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1613664000000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1613750400000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1613836800000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1613923200000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1614009600000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1614096000000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1614182400000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1614268800000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1614355200000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1614441600000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1614528000000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1614614400000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1614700800000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1614787200000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1614873600000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1614960000000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1615046400000},
-  //   {"yactive": 2, "ytotal": 3, "xtime": 1615132800000}
-  // ];
   List<FlSpot> yactive = [];
   List<FlSpot> ytotal = [];
   bool isMonth = true;
