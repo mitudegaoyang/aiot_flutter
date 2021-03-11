@@ -41,7 +41,7 @@ class _LineChartAiotState extends State<DeviceStatistics> {
           Container(
             width: double.infinity,
             padding: const EdgeInsets.only(
-                right: 0.0, left: 0.0, top: 50, bottom: 12),
+                right: 3.0, left: 3.0, top: 50, bottom: 12),
             child: Obx(
               () => c.trendList.length > 0
                   ? LineChart(
