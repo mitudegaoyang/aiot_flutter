@@ -37,6 +37,7 @@ class _LineChartAiotState extends State<LineChartTrend> {
     for (Telemetry t in c) {
       yData.add(FlSpot(t.x.toDouble(), t.y.toDouble()));
     }
+    final now = Day().add(10, 's');
     return LineChartData(
       gridData: FlGridData(
         show: false, // 网格线
@@ -66,7 +67,6 @@ class _LineChartAiotState extends State<LineChartTrend> {
               fontSize: 16),
           getTitles: (value) {
             final d = Day.fromUnix(value.toInt());
-            final now = Day().add(10, 's');
             if (now.diff(d, 's') % 30 == 0) {
               return d.format('mm:ss');
             }
