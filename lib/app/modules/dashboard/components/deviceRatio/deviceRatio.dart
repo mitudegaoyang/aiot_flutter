@@ -134,73 +134,58 @@ class DeviceRatioState extends State {
 
   List<Widget> showTitle(c) {
     List<Map<String, dynamic>> data = c;
-    if (data?.isNotEmpty ?? false) {
-      return new List<Widget>.from(data.asMap().keys.map((i) {
-        return Container(
-          decoration: BoxDecoration(),
-          child: Wrap(
-            direction: Axis.vertical,
-            children: [
-              Indicator(
-                color: ratioColor[i] ?? Color(0xff0293ee),
-                text: data[i]["item"],
-                isSquare: true,
-                size: 10,
-              ),
-              SizedBox(
-                height: 4,
-              )
-            ],
-          ),
-        );
-      }));
-    } else {
-      return [];
+    if (data.length == 0) {
+      return null;
     }
+    return new List<Widget>.from(data.asMap().keys.map((i) {
+      return Container(
+        decoration: BoxDecoration(),
+        child: Wrap(
+          direction: Axis.vertical,
+          children: [
+            Indicator(
+              color: ratioColor[i] ?? Color(0xff0293ee),
+              text: data[i]["item"],
+              isSquare: true,
+              size: 10,
+            ),
+            SizedBox(
+              height: 4,
+            )
+          ],
+        ),
+      );
+    }));
   }
 
   List<PieChartSectionData> showingSections(c) {
     List<Map<String, dynamic>> data = c;
     double total = 0;
-    if (data?.isNotEmpty ?? false) {
-      //计算total
-      for (int i = 0; i < data.length; i++) {
-        total += data[i]['count'];
-      }
-      return new List<PieChartSectionData>.from(data.asMap().keys.map((i) {
-        final isTouched = i == touchedIndex;
-        final double fontSize = isTouched ? 20 : 14;
-        final double radius = isTouched ? 60 : 50;
-        String count = "0";
-        if (data[i]['count'] > 0) {
-          count = "${(data[i]['count'] / total * 100).round()}%";
-        }
-        return PieChartSectionData(
-          color: ratioColor[i] ?? Color(0xff0293ee),
-          value: data[i]['count'].toDouble(),
-          title: count,
-          radius: radius,
-          titleStyle: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xffffffff)),
-        );
-      })).toList();
-      // data.forEach((value) {
-      //   print("${value.toString()}  ------");
-      //   return PieChartSectionData(
-      //     color: const Color(0xff0293ee),
-      //     value: 40.0,
-      //     title: "gateway",
-      //     radius: 50,
-      //     titleStyle: TextStyle(
-      //         fontSize: 16,
-      //         fontWeight: FontWeight.bold,
-      //         color: const Color(0xffffffff)),
-      //   );
-      // });
-    } else {
-      return [];
+    if (data.length == 0) {
+      return null;
     }
+    //计算total
+    for (int i = 0; i < data.length; i++) {
+      total += data[i]['count'];
+    }
+    return new List<PieChartSectionData>.from(data.asMap().keys.map((i) {
+      final isTouched = i == touchedIndex;
+      final double fontSize = isTouched ? 20 : 14;
+      final double radius = isTouched ? 60 : 50;
+      String count = "0";
+      if (data[i]['count'] > 0) {
+        count = "${(data[i]['count'] / total * 100).round()}%";
+      }
+      return PieChartSectionData(
+        color: ratioColor[i] ?? Color(0xff0293ee),
+        value: data[i]['count'].toDouble(),
+        title: count,
+        radius: radius,
+        titleStyle: TextStyle(
+            fontSize: fontSize,
+            fontWeight: FontWeight.bold,
+            color: const Color(0xffffffff)),
+      );
+    })).toList();
   }
 }
