@@ -90,19 +90,23 @@ class DashboardController extends GetxController {
   void timers() {
     timer = Timer(Duration(seconds: 10), () {
       dashboardProvider.getTelemetryTrend().then((data) {
-        telemetryTrendList.assignAll(data.body.histories);
-        telemetryTotal.value = data.body.total;
-      }).onError((error, stackTrace) {
-        dialogOpen();
-        timer.cancel();
-      });
+        if (data.statusCode == 200) {
+          telemetryTrendList.assignAll(data.body.histories);
+          telemetryTotal.value = data.body.total;
+        } else if (data.statusCode == 401) {
+          dialogOpen();
+          timer.cancel();
+        }
+      }).onError((error, stackTrace) {});
       dashboardProvider.getActionTrend().then((data) {
-        actionTrendList.assignAll(data.body.histories);
-        actionTotal.value = data.body.total;
-      }).onError((error, stackTrace) {
-        dialogOpen();
-        timer.cancel();
-      });
+        if (data.statusCode == 200) {
+          actionTrendList.assignAll(data.body.histories);
+          actionTotal.value = data.body.total;
+        } else if (data.statusCode == 401) {
+          dialogOpen();
+          timer.cancel();
+        }
+      }).onError((error, stackTrace) {});
       timers();
     });
   }
