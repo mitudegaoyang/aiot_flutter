@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 // import 'package:get_storage/get_storage.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'package:aiot/app/modules/dashboard/providers/dashboard_provider.dart';
 
@@ -21,7 +23,6 @@ class DashboardController extends GetxController {
   final actionTotal = 0.obs;
   final List deviceTop = [].obs;
   final count = 0.obs;
-  bool showDialog = false;
   Timer timer;
 
   @override
@@ -63,20 +64,37 @@ class DashboardController extends GetxController {
 
   void increment() => count.value++;
 
+  void dialogOpen() {
+    showDialog(
+      context: Get.context,
+      builder: (BuildContext context) => CupertinoAlertDialog(
+        title: new Text("提示"),
+        content: new Text("您的账号在另一台设备登录!"),
+        actions: <Widget>[
+          CupertinoDialogAction(
+            isDefaultAction: true,
+            child: Text('OK'),
+            onPressed: () => Navigator.of(context).pop(false),
+          )
+        ],
+      ),
+    );
+  }
+
   void timers() {
     timer = Timer(Duration(seconds: 10), () {
       dashboardProvider.getTelemetryTrend().then((data) {
         telemetryTrendList.assignAll(data.body.histories);
         telemetryTotal.value = data.body.total;
       }).onError((error, stackTrace) {
-        showDialog = true;
+        dialogOpen();
         timer.cancel();
       });
       dashboardProvider.getActionTrend().then((data) {
         actionTrendList.assignAll(data.body.histories);
         actionTotal.value = data.body.total;
       }).onError((error, stackTrace) {
-        showDialog = true;
+        dialogOpen();
         timer.cancel();
       });
       timers();
