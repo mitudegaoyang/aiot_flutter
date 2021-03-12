@@ -21,6 +21,7 @@ class DashboardController extends GetxController {
   final actionTotal = 0.obs;
   final List deviceTop = [].obs;
   final count = 0.obs;
+  bool showDialog = false;
   Timer timer;
 
   @override
@@ -67,10 +68,16 @@ class DashboardController extends GetxController {
       dashboardProvider.getTelemetryTrend().then((data) {
         telemetryTrendList.assignAll(data.body.histories);
         telemetryTotal.value = data.body.total;
+      }).onError((error, stackTrace) {
+        showDialog = true;
+        timer.cancel();
       });
       dashboardProvider.getActionTrend().then((data) {
         actionTrendList.assignAll(data.body.histories);
         actionTotal.value = data.body.total;
+      }).onError((error, stackTrace) {
+        showDialog = true;
+        timer.cancel();
       });
       timers();
     });
